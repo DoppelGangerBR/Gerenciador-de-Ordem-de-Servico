@@ -16,7 +16,16 @@ import javax.swing.JOptionPane;
  * @author Alvaro
  */
 public class Login extends javax.swing.JFrame {
-    
+    private String mensagem;
+    private Boolean status;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
     private String getMensagem() {
         return mensagem;
     }
@@ -25,7 +34,7 @@ public class Login extends javax.swing.JFrame {
         this.mensagem = mensagem;
     }
 
-private String mensagem;
+
     /**
      * Creates new form login
      */
@@ -66,10 +75,10 @@ private String mensagem;
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gerenciador de ordem de serviço");
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel2.setText("Usuario.:");
 
-        jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel3.setText("Senha.:");
 
         TxtSenha.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -101,19 +110,15 @@ private String mensagem;
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtSenha)
+                    .addComponent(TxtUsuario)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TxtSenha)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(TxtUsuario)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -167,11 +172,13 @@ private String mensagem;
         fazAutenticacao.setUsuario(TxtUsuario.getText());
         fazAutenticacao.setSenha(TxtSenha.getText());
         try {
+            this.dispose();
             fazAutenticacao.ValidaLogin();
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            this.dispose();
+            ValidaLoginUsuario retorno = new ValidaLoginUsuario();
+                        
         }
     }//GEN-LAST:event_BtnEntrarActionPerformed
     public void exibeMensagens(){
@@ -212,6 +219,7 @@ private String mensagem;
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancelarLogin;

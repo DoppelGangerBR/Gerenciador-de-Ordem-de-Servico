@@ -1,7 +1,8 @@
 
 package Controller;
 
-import Model.UsuariosDAO;
+import Model.EntidadeConexao;
+import DAO.UsuariosDAO;
 import View.Login;
 import View.Principal;
 import java.sql.SQLException;
@@ -37,10 +38,11 @@ public class ValidaLoginUsuario {
     public void ValidaLogin() throws SQLException{
         if(getSenha().equals("") || getUsuario().equals("")){
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos", "Erro", 0);
+            new Login().setVisible(true);
         }else{
             UsuariosDAO tentaLogin = new UsuariosDAO();
             tentaLogin.AutenticaLogin(getUsuario(), getSenha());
-        }        
+        }
     }
     public void statusDoLogin(){
         if(getStatus() == true){
@@ -48,13 +50,17 @@ public class ValidaLoginUsuario {
            retornaStatusDoControle.setMensagem("Entrou");
            retornaStatusDoControle.exibeMensagens();
            retornaStatusDoControle.dispose();
-           new Principal().setVisible(true);           
+           retornaStatusDoControle.setStatus(getStatus());
+           retornaStatusDoControle.setStatus(true);
+           new Principal().setVisible(true);
         }else if(getStatus() == false){
             Login retornaStatusDoControle = new Login();
+            retornaStatusDoControle.setStatus(false);
+            retornaStatusDoControle.setVisible(true);
             retornaStatusDoControle.setMensagem("Falha, usuario ou senha incorretos\n"
                     + "Por favor, tente novamente!");
             retornaStatusDoControle.exibeMensagens();
         }
-        
     }
+
 }
