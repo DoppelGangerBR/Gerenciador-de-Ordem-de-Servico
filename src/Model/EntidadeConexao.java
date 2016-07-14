@@ -11,5 +11,7 @@ public class EntidadeConexao {
     public Connection abreConexao() throws SQLException{
         return DriverManager.getConnection(url,user,pass);
     }
-
+    public void teste(){
+        
+    }
 }
