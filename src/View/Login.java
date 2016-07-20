@@ -176,9 +176,6 @@ public class Login extends javax.swing.JFrame {
             fazAutenticacao.ValidaLogin();
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            ValidaLoginUsuario retorno = new ValidaLoginUsuario();
-                        
         }
     }//GEN-LAST:event_BtnEntrarActionPerformed
     public void exibeMensagens(){

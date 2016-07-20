@@ -5,8 +5,10 @@ import Controller.validaCadastroCliente;
 import Model.EntidadeConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class ClientesDAO extends EntidadeConexao{
@@ -33,6 +35,39 @@ public class ClientesDAO extends EntidadeConexao{
             prs.close();
             conexao.close();
         }
+    }
+    public DefaultTableModel AlimentaTabelaClientes() throws SQLException{
+        DefaultTableModel dm = new DefaultTableModel();
+        Connection conexao = abreConexao();
+        ResultSet rset = null;
+        PreparedStatement prs = null;
+        dm.addColumn("Código");
+        dm.addColumn("Nome");
+        dm.addColumn("Telefone");
+        dm.addColumn("Celular");
+        String sql = "SELECT * FROM cadastro_clientes";
+        
+        try{            
+            prs = conexao.prepareStatement(sql);
+            rset = prs.executeQuery();
+            while(rset.next()){
+                String IdCliente     = rset.getString(1);
+                String NomeCliente   = rset.getString(2);
+                String CelularC     = rset.getString(3);
+                String TelefoneC     = rset.getString(4);
+                dm.addRow(new String[]{IdCliente, NomeCliente,CelularC,TelefoneC});
+            }
+            rset.close();
+            prs.close();
+            conexao.close();
+            return dm;
+        }catch(SQLException e){
+            e.getMessage();
+            rset.close();
+            prs.close();
+            conexao.close();
+        }        
+        return null;
     }
     
     

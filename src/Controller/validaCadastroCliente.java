@@ -25,7 +25,9 @@ public class validaCadastroCliente {
             gravaCliente.setEstado(getEstado());
             gravaCliente.setBairro(getBairro());
             gravaCliente.setNumero(getNumero());
+            gravaCliente.setCidade(getCidade());
             gravaCliente.cadastraCliente();
+            
         }
     }
     public void enviaStatusPraView(){

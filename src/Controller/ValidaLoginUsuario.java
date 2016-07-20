@@ -47,8 +47,8 @@ public class ValidaLoginUsuario {
     public void statusDoLogin(){
         if(getStatus() == true){
            Login retornaStatusDoControle = new Login();
-           retornaStatusDoControle.setMensagem("Entrou");
-           retornaStatusDoControle.exibeMensagens();
+           //retornaStatusDoControle.setMensagem("Entrou");
+           //retornaStatusDoControle.exibeMensagens();
            retornaStatusDoControle.dispose();
            retornaStatusDoControle.setStatus(getStatus());
            retornaStatusDoControle.setStatus(true);
