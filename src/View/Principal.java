@@ -145,7 +145,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JOptionPane.showMessageDialog(null, "blbelbelbelbelbleeble");
+        new TelaNovaOrdemDeServico().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -157,7 +157,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja fechar o software?","Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja fechar o software?","Confirmação", JOptionPane.YES_NO_OPTION);
         if(confirma == JOptionPane.YES_OPTION){
             System.exit(0);
         }

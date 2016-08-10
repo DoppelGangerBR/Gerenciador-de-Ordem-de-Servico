@@ -348,11 +348,7 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalvarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int CancelaSimOuNao;
-        CancelaSimOuNao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar o cadastro?","Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if(CancelaSimOuNao == JOptionPane.YES_OPTION){
-            this.dispose();
-        }
+        CancelaCadastro();
     }//GEN-LAST:event_formWindowClosing
 
     private void BtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimparActionPerformed
@@ -360,7 +356,7 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLimparActionPerformed
     private void CancelaCadastro(){
         int CancelaSimOuNao;
-        CancelaSimOuNao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar o cadastro?","Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        CancelaSimOuNao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar o cadastro?","Confirmação", JOptionPane.YES_NO_OPTION);
         if(CancelaSimOuNao == JOptionPane.YES_OPTION){
             this.dispose();
         }
