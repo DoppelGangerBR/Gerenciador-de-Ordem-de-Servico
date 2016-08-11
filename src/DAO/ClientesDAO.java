@@ -45,6 +45,11 @@ public class ClientesDAO extends EntidadeConexao{
         dm.addColumn("Nome");
         dm.addColumn("Telefone");
         dm.addColumn("Celular");
+        dm.addColumn("CPF/CNPJ");
+        dm.addColumn("Endereço");
+        dm.addColumn("Bairro");
+        dm.addColumn("Numero");
+        dm.addColumn("Cidade");
         String sql = "SELECT * FROM cadastro_clientes";
         
         try{            
@@ -55,7 +60,12 @@ public class ClientesDAO extends EntidadeConexao{
                 String NomeCliente   = rset.getString(2);
                 String CelularC     = rset.getString(3);
                 String TelefoneC     = rset.getString(4);
-                dm.addRow(new String[]{IdCliente, NomeCliente,CelularC,TelefoneC});
+                String CpfCnpj      = rset.getString(6);
+                String endereco     = rset.getString(5);
+                String bairro       = rset.getString(7);
+                String numero       = rset.getString(10);
+                String cidade       = rset.getString(8);
+                dm.addRow(new String[]{IdCliente, NomeCliente,CelularC,TelefoneC,CpfCnpj,endereco,bairro,numero,cidade});
             }
             rset.close();
             prs.close();

@@ -22,6 +22,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
      */
     public TelaNovaOrdemDeServico() {
         initComponents();
+        
     }
 
     /**
@@ -420,7 +421,11 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
         controllerOs.setNumeroSerieOs(TxtNumSerieEquipOs.getText());
         controllerOs.setAcessorioObservacaoOs(TxtAcessorioObsOs.getText());
         controllerOs.setProblemaReclamadoOs(TxtProblemaReclamadoOS.getText());
-        controllerOs.VerificaCamposObrigatorios();
+        try {
+            controllerOs.VerificaCamposObrigatorios();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

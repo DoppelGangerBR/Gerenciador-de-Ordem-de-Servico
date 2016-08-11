@@ -20,8 +20,7 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
     private Boolean statusCadastro;
     
     public TelaCadastroClientes() {
-        initComponents();
-        
+        initComponents();        
     }
 
     /**
