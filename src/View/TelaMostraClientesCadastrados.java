@@ -9,6 +9,7 @@ import DAO.ClientesDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -252,17 +253,18 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        TelaVisualizarDadosDoCliente EnviaDadosPraView = new TelaVisualizarDadosDoCliente();
-        EnviaDadosPraView.setNome(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 1).toString());
-        EnviaDadosPraView.setTelefone(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 2).toString());
-        EnviaDadosPraView.setCelular(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 3).toString());
-        EnviaDadosPraView.setCpfCnpj(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 4).toString());
-        EnviaDadosPraView.setEndereco(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString());
-        EnviaDadosPraView.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
-        EnviaDadosPraView.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
-        EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());
-        
-        new TelaVisualizarDadosDoCliente().setVisible(true);
+        TelaVisualizarDadosDoCliente EnviaDadosPraView;
+        EnviaDadosPraView = new TelaVisualizarDadosDoCliente();
+        EnviaDadosPraView.setNomeV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 1).toString());
+        EnviaDadosPraView.setTelefoneV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 2).toString());
+        EnviaDadosPraView.setCelularV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 3).toString());
+        EnviaDadosPraView.setCpfCnpjV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 4).toString());
+        EnviaDadosPraView.setEnderecoV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString());
+        EnviaDadosPraView.setBairroV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
+        EnviaDadosPraView.setNumeroV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
+        EnviaDadosPraView.setCidadeV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());        
+        EnviaDadosPraView.AlimentaCampos();
+        EnviaDadosPraView.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
     private void AtualizaTabelaClientes() throws SQLException{
         DefaultTableModel dm = new ClientesDAO().AlimentaTabelaClientes();

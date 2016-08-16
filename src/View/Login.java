@@ -6,9 +6,17 @@
 package View;
 
 import Controller.ValidaLoginUsuario;
+import com.sun.webkit.event.WCKeyEvent;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,7 +47,9 @@ public class Login extends javax.swing.JFrame {
      * Creates new form login
      */
     public Login() {
-        initComponents();
+        initComponents();   
+        ImageIcon imgicon = new ImageIcon("imgs/Broom-52.png");
+        
     }
 
     /**
@@ -216,6 +226,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

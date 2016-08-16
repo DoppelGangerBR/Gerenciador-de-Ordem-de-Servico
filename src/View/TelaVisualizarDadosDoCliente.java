@@ -6,13 +6,14 @@
 package View;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Alvaro
  */
 public final class TelaVisualizarDadosDoCliente extends TelaCadastroClientes {
-    private String Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado;
+    private String NomeV,TelefoneV,CelularV,CpfCnpjV,EnderecoV,NumeroV,BairroV,CidadeV,EstadoV;
 
     
     public TelaVisualizarDadosDoCliente(){
@@ -28,95 +29,98 @@ public final class TelaVisualizarDadosDoCliente extends TelaCadastroClientes {
         BtnLimpar.setVisible(false);
         BtnSalvar.setVisible(false);
         BtnCancelar.setText("Fechar  [ESC]");
-        TxtBairro.setEditable(false);
         TxtNome.setEditable(false);
+        TxtBairro.setEditable(false);
         TxtCeluar.setEditable(false);
         TxtCidade.setEditable(false);
         TxtCpfCnpj.setEditable(false);
         TxtEndereco.setEditable(false);
         TxtEstado.setEditable(false);
         TxtNumeroEndereco.setEditable(false);
-        TxtTelefone.setEditable(false);     
-        TxtBairro.setText(getBairro());
-        TxtCeluar.setText(getCelular());
-        TxtCidade.setText(getCidade());
-        TxtCpfCnpj.setText(getCpfCnpj());
-        TxtEndereco.setText(getEndereco());
-        TxtEstado.setText(getEstado());
-        TxtNome.setText(getNome());
-        TxtNumeroEndereco.setText(getNumero());
-        TxtTelefone.setText(getTelefone());
+        TxtTelefone.setEditable(false);
+        
     }
-    public String getNome() {
-        return Nome;
-    }
-
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void AlimentaCampos(){
+        TxtBairro.setText(getBairroV());
+        TxtCeluar.setText(getCelularV());
+        TxtCidade.setText(getCidadeV());
+        TxtCpfCnpj.setText(getCpfCnpjV());
+        TxtEndereco.setText(getEnderecoV());
+        TxtEstado.setText(getEstadoV());
+        TxtNome.setText(getNomeV());
+        TxtNumeroEndereco.setText(getNumeroV());
+        TxtTelefone.setText(getTelefoneV());
     }
 
-    public String getTelefone() {
-        return Telefone;
+    public String getNomeV() {
+        return NomeV;
     }
 
-    public void setTelefone(String Telefone) {
-        this.Telefone = Telefone;
+    public void setNomeV(String NomeV) {
+        this.NomeV = NomeV;
     }
 
-    public String getCelular() {
-        return Celular;
+    public String getTelefoneV() {
+        return TelefoneV;
     }
 
-    public void setCelular(String Celular) {
-        this.Celular = Celular;
+    public void setTelefoneV(String TelefoneV) {
+        this.TelefoneV = TelefoneV;
     }
 
-    public String getCpfCnpj() {
-        return CpfCnpj;
+    public String getCelularV() {
+        return CelularV;
     }
 
-    public void setCpfCnpj(String CpfCnpj) {
-        this.CpfCnpj = CpfCnpj;
+    public void setCelularV(String CelularV) {
+        this.CelularV = CelularV;
     }
 
-    public String getEndereco() {
-        return Endereco;
+    public String getCpfCnpjV() {
+        return CpfCnpjV;
     }
 
-    public void setEndereco(String Endereco) {
-        this.Endereco = Endereco;
+    public void setCpfCnpjV(String CpfCnpjV) {
+        this.CpfCnpjV = CpfCnpjV;
     }
 
-    public String getNumero() {
-        return Numero;
+    public String getEnderecoV() {
+        return EnderecoV;
     }
 
-    public void setNumero(String Numero) {
-        this.Numero = Numero;
+    public void setEnderecoV(String EnderecoV) {
+        this.EnderecoV = EnderecoV;
     }
 
-    public String getBairro() {
-        return Bairro;
+    public String getNumeroV() {
+        return NumeroV;
     }
 
-    public void setBairro(String Bairro) {
-        this.Bairro = Bairro;
+    public void setNumeroV(String NumeroV) {
+        this.NumeroV = NumeroV;
     }
 
-    public String getCidade() {
-        return Cidade;
+    public String getBairroV() {
+        return BairroV;
     }
 
-    public void setCidade(String Cidade) {
-        this.Cidade = Cidade;
+    public void setBairroV(String BairroV) {
+        this.BairroV = BairroV;
     }
 
-    public String getEstado() {
-        return Estado;
+    public String getCidadeV() {
+        return CidadeV;
     }
 
-    public void setEstado(String Estado) {
-        this.Estado = Estado;
+    public void setCidadeV(String CidadeV) {
+        this.CidadeV = CidadeV;
     }
-    
+
+    public String getEstadoV() {
+        return EstadoV;
+    }
+
+    public void setEstadoV(String EstadoV) {
+        this.EstadoV = EstadoV;
+    }
 }
