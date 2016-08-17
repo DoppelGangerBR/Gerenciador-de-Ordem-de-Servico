@@ -61,7 +61,7 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
         OpcCancelar = new javax.swing.JMenuItem();
         OpcLimparCampos = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Cliente - Cadastro");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -355,7 +355,7 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLimparActionPerformed
     private void CancelaCadastro(){
         int CancelaSimOuNao;
-        CancelaSimOuNao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar o cadastro?","Confirmação", JOptionPane.YES_NO_OPTION);
+        CancelaSimOuNao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?","Confirmação", JOptionPane.YES_NO_OPTION);
         if(CancelaSimOuNao == JOptionPane.YES_OPTION){
             this.dispose();
         }
@@ -363,24 +363,15 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
     private void realizarCadastro() throws SQLException{
         //Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado
         validaCadastroCliente controle = new validaCadastroCliente();
-        Nome     = TxtNome.getText();
-        Telefone = TxtTelefone.getText();
-        Celular  = TxtCeluar.getText();
-        CpfCnpj  = TxtCpfCnpj.getText();
-        Endereco = TxtEndereco.getText();
-        Numero   = TxtNumeroEndereco.getText();
-        Bairro   = TxtBairro.getText();
-        Cidade   = TxtCidade.getText();
-        Estado   = TxtEstado.getText();
-        controle.setNome(Nome);
-        controle.setTelefone(Telefone);
-        controle.setCelular(Celular);
-        controle.setCpfCnpj(CpfCnpj);
-        controle.setEndereco(Endereco);
-        controle.setNumero(Numero);
-        controle.setBairro(Bairro);
-        controle.setCidade(Cidade);
-        controle.setEstado(Estado);
+        controle.setNome(TxtNome.getText());
+        controle.setTelefone(TxtTelefone.getText());
+        controle.setCelular(TxtCeluar.getText());
+        controle.setCpfCnpj(TxtCpfCnpj.getText());
+        controle.setEndereco(TxtEndereco.getText());
+        controle.setNumero(TxtNumeroEndereco.getText());
+        controle.setBairro(TxtBairro.getText());
+        controle.setCidade(TxtCidade.getText());
+        controle.setEstado(TxtEstado.getText());        
         controle.validaCampos();
         
     }
@@ -471,8 +462,8 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
     public javax.swing.JLabel LabelTelefoneCliente;
     public javax.swing.JLabel LabelTituloCliente;
     public javax.swing.JMenuItem OpcCancelar;
-    private javax.swing.JMenuItem OpcLimparCampos;
-    private javax.swing.JMenuItem OpcSalvar;
+    public javax.swing.JMenuItem OpcLimparCampos;
+    public javax.swing.JMenuItem OpcSalvar;
     public javax.swing.JTextField TxtBairro;
     public javax.swing.JFormattedTextField TxtCeluar;
     public javax.swing.JTextField TxtCidade;

@@ -79,6 +79,9 @@ public class ClientesDAO extends EntidadeConexao{
         }        
         return null;
     }
+    public void AlteraDadosCliente(){
+        
+    }
     
     
     public String getNome() {

@@ -143,6 +143,11 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Remove User Male-48.png"))); // NOI18N
@@ -266,6 +271,10 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         EnviaDadosPraView.AlimentaCampos();
         EnviaDadosPraView.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new TelaAlterarCliente().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void AtualizaTabelaClientes() throws SQLException{
         DefaultTableModel dm = new ClientesDAO().AlimentaTabelaClientes();
         TabelaClientes.setModel(dm);

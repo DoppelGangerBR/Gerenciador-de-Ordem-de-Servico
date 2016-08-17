@@ -26,6 +26,8 @@ public final class TelaVisualizarDadosDoCliente extends TelaCadastroClientes {
         LabelCpfCnpjCliente.setText("CPF/CNPJ.:");
         LabelCpfCnpjCliente.setForeground(Color.BLACK);
         OpcCancelar.setText("Fechar");
+        OpcLimparCampos.setVisible(false);
+        OpcSalvar.setVisible(false);
         BtnLimpar.setVisible(false);
         BtnSalvar.setVisible(false);
         BtnCancelar.setText("Fechar  [ESC]");
@@ -51,7 +53,6 @@ public final class TelaVisualizarDadosDoCliente extends TelaCadastroClientes {
         TxtNumeroEndereco.setText(getNumeroV());
         TxtTelefone.setText(getTelefoneV());
     }
-
     public String getNomeV() {
         return NomeV;
     }
