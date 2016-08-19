@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Alvaro
  */
-public class TelaAlterarCliente extends TelaCadastroClientes{
+public class TelaAlterarCliente extends TelaCadastroAlteracaoVisualizacaoClientes{
 
     public TelaAlterarCliente() {
         setTitle("Cliente - Alteração");

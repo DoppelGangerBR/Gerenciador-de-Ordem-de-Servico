@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Alvaro
  */
-public final class TelaVisualizarDadosDoCliente extends TelaCadastroClientes {
+public final class TelaVisualizarDadosDoCliente extends TelaCadastroAlteracaoVisualizacaoClientes {
     private String NomeV,TelefoneV,CelularV,CpfCnpjV,EnderecoV,NumeroV,BairroV,CidadeV,EstadoV;
 
     

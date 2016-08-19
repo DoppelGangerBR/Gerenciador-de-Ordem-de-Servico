@@ -3,6 +3,7 @@ package DAO;
 
 import Controller.validaCadastroCliente;
 import Model.EntidadeConexao;
+import View.TelaMostraClientesCadastrados;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,15 @@ import javax.swing.table.DefaultTableModel;
 public class ClientesDAO extends EntidadeConexao{
     private String Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado;    
     private Boolean statusCadastro;
+    private String id_cliente;
+
+    public String getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(String id_cliente) {
+        this.id_cliente = id_cliente;
+    }
     public void cadastraCliente()throws SQLException{
         Connection conexao = abreConexao();
         validaCadastroCliente retornaStatusEMensagem = new validaCadastroCliente();
@@ -26,13 +36,14 @@ public class ClientesDAO extends EntidadeConexao{
             statusCadastro = true;
             retornaStatusEMensagem.setStatusCadastro(statusCadastro);
             retornaStatusEMensagem.enviaStatusPraView();
+            TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
+            AtualizaTabela.AtualizaTabelaClientes();
         }catch(SQLException e){
             statusCadastro = false;
             retornaStatusEMensagem.setStatusCadastro(statusCadastro);
             retornaStatusEMensagem.enviaStatusPraView();
             JOptionPane.showMessageDialog(null,e.getMessage());
-        }finally{
-            prs.close();
+        }finally{            
             conexao.close();
         }
     }
@@ -79,8 +90,25 @@ public class ClientesDAO extends EntidadeConexao{
         }        
         return null;
     }
-    public void AlteraDadosCliente(){
-        
+    public void AlteraDadosCliente() throws SQLException{
+        Connection conexao = abreConexao();
+        PreparedStatement prs;
+        String sql = "UPDATE cadastro_clientes SET nome='"+getNome()+"',telefone ='"+getTelefone()+"',celular = '"+getCelular()+"',"
+                + "endereco ='"+getEndereco()+"',cpfcnpj ='"+getCpfCnpj()+"',bairro ='"+getBairro()+"',"
+                + "cidade ='"+getCidade()+"',estado ='"+getEstado()+"',numero ='"+getNumero()+"' WHERE id_cliente ='"+getId_cliente()+"'";
+        try{
+            prs = conexao.prepareStatement(sql);
+            prs.executeUpdate();
+            conexao.close();
+            JOptionPane.showMessageDialog(null, "[OK] Alterado");
+            TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
+            AtualizaTabela.AtualizaTabelaClientes();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "[FALHA] Alteração");
+            conexao.close();
+        }finally{
+            conexao.close();
+        }
     }
     
     

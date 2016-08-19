@@ -15,12 +15,18 @@ import javax.swing.JOptionPane;
  *
  * @author Alvaro
  */
-public class TelaCadastroClientes extends javax.swing.JFrame {
+public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFrame {
     private String Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado,Mensagem,TituloMensagem;
     private Boolean statusCadastro;
+    private String id_cliente;
+
     
-    public TelaCadastroClientes() {
-        initComponents();        
+    
+    public TelaCadastroAlteracaoVisualizacaoClientes() {
+        initComponents();
+        if(getId_cliente() != null){
+            LabelTituloCliente.setText("Cliente - Alteração");
+        }
     }
 
     /**
@@ -320,11 +326,13 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
 
     private void OpcSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcSalvarActionPerformed
         try {
-            realizarCadastro();
+            realizarCadastroAlteracao();
         } catch (SQLException ex) {
-            Logger.getLogger(TelaCadastroClientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_OpcSalvarActionPerformed
+
+    
 
     private void OpcCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcCancelarActionPerformed
         CancelaCadastro();
@@ -340,10 +348,10 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
 
     private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
         try {
-            realizarCadastro();
+            realizarCadastroAlteracao();
         } catch (SQLException ex) {
-            Logger.getLogger(TelaCadastroClientes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }     
     }//GEN-LAST:event_BtnSalvarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -360,7 +368,8 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
             this.dispose();
         }
     }
-    private void realizarCadastro() throws SQLException{
+    private void realizarCadastroAlteracao() throws SQLException{
+        if(getId_cliente() == null){
         //Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado
         validaCadastroCliente controle = new validaCadastroCliente();
         controle.setNome(TxtNome.getText());
@@ -373,8 +382,60 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
         controle.setCidade(TxtCidade.getText());
         controle.setEstado(TxtEstado.getText());        
         controle.validaCampos();
+        TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
+        AtualizaTabela.AtualizaTabelaClientes();
+        }else{
+            validaCadastroCliente controle = new validaCadastroCliente();
+            controle.setId_cliente(getId_cliente());
+            controle.setNome(TxtNome.getText());
+            controle.setTelefone(TxtTelefone.getText());
+            controle.setCelular(TxtCeluar.getText());
+            controle.setCpfCnpj(TxtCpfCnpj.getText());
+            controle.setEndereco(TxtEndereco.getText());
+            controle.setNumero(TxtNumeroEndereco.getText());
+            controle.setBairro(TxtBairro.getText());
+            controle.setCidade(TxtCidade.getText());
+            controle.setEstado(TxtEstado.getText());        
+            controle.validaCampos();
+            TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
+            AtualizaTabela.AtualizaTabelaClientes();
+        }       
         
     }
+    public void AlimentaCampos(){
+        if(getMensagem().equals("Alteração")){
+            BtnLimpar.setEnabled(false);
+            OpcLimparCampos.setEnabled(false);
+        }
+        LabelTituloCliente.setText("Cliente - "+getMensagem());        
+        TxtBairro.setText(getBairro());
+        TxtCeluar.setText(getCelular());
+        TxtCidade.setText(getCidade());
+        TxtCpfCnpj.setText(getCpfCnpj());
+        TxtEndereco.setText(getEndereco());
+        TxtEstado.setText(getEstado());
+        TxtNome.setText(getNome());
+        TxtNumeroEndereco.setText(getNumero());
+        TxtTelefone.setText(getTelefone());
+    }
+    
+    public void DisativaCampos(){
+        BtnLimpar.setEnabled(false);
+        BtnSalvar.setEnabled(false);
+        OpcLimparCampos.setVisible(false);
+        OpcSalvar.setEnabled(false);
+        TxtBairro.setEditable(false);
+        TxtCeluar.setEditable(false);
+        TxtCidade.setEditable(false);
+        TxtCpfCnpj.setEditable(false);
+        TxtEndereco.setEditable(false);
+        TxtEstado.setEditable(false);
+        TxtNome.setEditable(false);
+        TxtNumeroEndereco.setEditable(false);
+        TxtTelefone.setEditable(false);        
+    }
+
+    
     public void exibeMensagens(){
         if(getStatusCadastro() == true){
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Cliente Cadastrado", JOptionPane.INFORMATION_MESSAGE);
@@ -401,20 +462,23 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCadastroClientes().setVisible(true);
+                new TelaCadastroAlteracaoVisualizacaoClientes().setVisible(true);
             }
         });
     }
@@ -428,6 +492,78 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
         TxtBairro.setText("");
         TxtCidade.setText("");
         TxtEstado.setText("");
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String Nome) {
+        this.Nome = Nome;
+    }
+
+    public String getTelefone() {
+        return Telefone;
+    }
+
+    public void setTelefone(String Telefone) {
+        this.Telefone = Telefone;
+    }
+
+    public String getCelular() {
+        return Celular;
+    }
+
+    public void setCelular(String Celular) {
+        this.Celular = Celular;
+    }
+
+    public String getCpfCnpj() {
+        return CpfCnpj;
+    }
+
+    public void setCpfCnpj(String CpfCnpj) {
+        this.CpfCnpj = CpfCnpj;
+    }
+
+    public String getEndereco() {
+        return Endereco;
+    }
+
+    public void setEndereco(String Endereco) {
+        this.Endereco = Endereco;
+    }
+
+    public String getNumero() {
+        return Numero;
+    }
+
+    public void setNumero(String Numero) {
+        this.Numero = Numero;
+    }
+
+    public String getBairro() {
+        return Bairro;
+    }
+
+    public void setBairro(String Bairro) {
+        this.Bairro = Bairro;
+    }
+
+    public String getCidade() {
+        return Cidade;
+    }
+
+    public void setCidade(String Cidade) {
+        this.Cidade = Cidade;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
     }
 
     public String getMensagem() {
@@ -445,8 +581,20 @@ public class TelaCadastroClientes extends javax.swing.JFrame {
     public void setStatusCadastro(Boolean statusCadastro) {
         this.statusCadastro = statusCadastro;
     }
-    
+    public String getId_cliente() {
+        return id_cliente;
+    }
 
+    public void setId_cliente(String id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+    public String getTituloMensagem() {
+        return TituloMensagem;
+    }
+
+    public void setTituloMensagem(String TituloMensagem) {
+        this.TituloMensagem = TituloMensagem;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BtnCancelar;
     public javax.swing.JButton BtnLimpar;

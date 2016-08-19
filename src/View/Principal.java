@@ -159,7 +159,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        new TelaCadastroClientes().setVisible(true);
+        new TelaCadastroAlteracaoVisualizacaoClientes().setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

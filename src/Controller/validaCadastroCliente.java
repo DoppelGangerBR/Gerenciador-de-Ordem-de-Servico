@@ -1,37 +1,59 @@
 package Controller;
 
 import DAO.ClientesDAO;
-import View.TelaCadastroClientes;
+import View.TelaCadastroAlteracaoVisualizacaoClientes;
 import java.sql.SQLException;
 
 public class validaCadastroCliente {
-    private String Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado,Mensagem,TituloMensagem;    
+    private String Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado,Mensagem,TituloMensagem,id_cliente;    
 
     
     private Boolean statusCadastro;
-    TelaCadastroClientes retornoMensagens = new TelaCadastroClientes();
+    TelaCadastroAlteracaoVisualizacaoClientes retornoMensagens = new TelaCadastroAlteracaoVisualizacaoClientes();
     public void validaCampos() throws SQLException{
         if(getNome().equals("") || getTelefone().equals("") || getCpfCnpj().equals("") || getNome() == null || getTelefone() == null || getCpfCnpj() == null){
             retornoMensagens.setStatusCadastro(false);
             retornoMensagens.setMensagem("Por favor, preencha todos os campos que possum (*)");
             retornoMensagens.exibeMensagens();
         }else{
-            ClientesDAO gravaCliente = new ClientesDAO();
-            gravaCliente.setNome(getNome());
-            gravaCliente.setTelefone(getTelefone());
-            gravaCliente.setCelular(getCelular());
-            gravaCliente.setCpfCnpj(getCpfCnpj());
-            gravaCliente.setEndereco(getEndereco());
-            gravaCliente.setEstado(getEstado());
-            gravaCliente.setBairro(getBairro());
-            gravaCliente.setNumero(getNumero());
-            gravaCliente.setCidade(getCidade());
-            gravaCliente.cadastraCliente();
-            
+            if(getId_cliente() == null){
+                ClientesDAO gravaCliente = new ClientesDAO();                
+                gravaCliente.setNome(getNome());
+                gravaCliente.setTelefone(getTelefone());
+                gravaCliente.setCelular(getCelular());
+                gravaCliente.setCpfCnpj(getCpfCnpj());
+                gravaCliente.setEndereco(getEndereco());
+                gravaCliente.setEstado(getEstado());
+                gravaCliente.setBairro(getBairro());
+                gravaCliente.setNumero(getNumero());
+                gravaCliente.setCidade(getCidade());
+                gravaCliente.cadastraCliente();   
+            }else{
+                ClientesDAO AlteraCliente = new ClientesDAO();
+                AlteraCliente.setId_cliente(getId_cliente());
+                AlteraCliente.setNome(getNome());
+                AlteraCliente.setTelefone(getTelefone());
+                AlteraCliente.setCelular(getCelular());
+                AlteraCliente.setCpfCnpj(getCpfCnpj());
+                AlteraCliente.setEndereco(getEndereco());
+                AlteraCliente.setEstado(getEstado());
+                AlteraCliente.setBairro(getBairro());
+                AlteraCliente.setNumero(getNumero());
+                AlteraCliente.setCidade(getCidade());
+                AlteraCliente.AlteraDadosCliente();
+            }
         }
     }
+
+    public String getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(String id_cliente) {
+        this.id_cliente = id_cliente;
+    }
     public void enviaStatusPraView(){
-        TelaCadastroClientes retornaStatus = new TelaCadastroClientes();
+        TelaCadastroAlteracaoVisualizacaoClientes retornaStatus = new TelaCadastroAlteracaoVisualizacaoClientes();
         retornaStatus.setStatusCadastro(getStatusCadastro());
         retornaStatus.exibeMensagens();
     }

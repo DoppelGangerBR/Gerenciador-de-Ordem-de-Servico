@@ -68,10 +68,10 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaClientes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        BtnEditar = new javax.swing.JButton();
+        BtnRemover = new javax.swing.JButton();
+        BtnAdicionar = new javax.swing.JButton();
+        BtnVisualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -137,46 +137,50 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Clientes Cadastrados");
 
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Edit User Male-50.png"))); // NOI18N
-        jButton1.setText("Editar");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnEditar.setBackground(new java.awt.Color(204, 204, 204));
+        BtnEditar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Edit User Male-50.png"))); // NOI18N
+        BtnEditar.setText("Editar");
+        BtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnEditar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnEditarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Remove User Male-48.png"))); // NOI18N
-        jButton2.setText("Remover");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnRemover.setBackground(new java.awt.Color(204, 204, 204));
+        BtnRemover.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Remove User Male-48.png"))); // NOI18N
+        BtnRemover.setText("Remover");
+        BtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnRemover.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnRemover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButton3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Add User Male-48.png"))); // NOI18N
-        jButton3.setText("Adicionar");
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnAdicionar.setBackground(new java.awt.Color(204, 204, 204));
+        BtnAdicionar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Add User Male-48.png"))); // NOI18N
+        BtnAdicionar.setText("Adicionar");
+        BtnAdicionar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnAdicionar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnAdicionar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnAdicionarActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Find User Male-48.png"))); // NOI18N
-        jButton4.setText("Visualizar");
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BtnVisualizar.setBackground(new java.awt.Color(204, 204, 204));
+        BtnVisualizar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Find User Male-48.png"))); // NOI18N
+        BtnVisualizar.setText("Visualizar");
+        BtnVisualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnVisualizar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        BtnVisualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnVisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BtnVisualizarActionPerformed(evt);
             }
         });
 
@@ -190,13 +194,13 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(BtnAdicionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(73, 73, 73)
-                        .addComponent(jButton1)
+                        .addComponent(BtnEditar)
                         .addGap(74, 74, 74)
-                        .addComponent(jButton4)))
+                        .addComponent(BtnVisualizar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -210,11 +214,11 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addComponent(jButton1))
+                            .addComponent(BtnVisualizar)
+                            .addComponent(BtnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(BtnEditar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
@@ -253,29 +257,44 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new TelaCadastroClientes().setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void BtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarActionPerformed
+        new TelaCadastroAlteracaoVisualizacaoClientes().setVisible(true);
+    }//GEN-LAST:event_BtnAdicionarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        TelaVisualizarDadosDoCliente EnviaDadosPraView;
-        EnviaDadosPraView = new TelaVisualizarDadosDoCliente();
-        EnviaDadosPraView.setNomeV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 1).toString());
-        EnviaDadosPraView.setTelefoneV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 2).toString());
-        EnviaDadosPraView.setCelularV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 3).toString());
-        EnviaDadosPraView.setCpfCnpjV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 4).toString());
-        EnviaDadosPraView.setEnderecoV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString());
-        EnviaDadosPraView.setBairroV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
-        EnviaDadosPraView.setNumeroV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
-        EnviaDadosPraView.setCidadeV(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());        
+    private void BtnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVisualizarActionPerformed
+        TelaCadastroAlteracaoVisualizacaoClientes EnviaDadosPraView;
+        EnviaDadosPraView = new TelaCadastroAlteracaoVisualizacaoClientes();        
+        EnviaDadosPraView.setNome(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 1).toString());
+        EnviaDadosPraView.setTelefone(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 2).toString());
+        EnviaDadosPraView.setCelular(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 3).toString());
+        EnviaDadosPraView.setCpfCnpj(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 4).toString());
+        EnviaDadosPraView.setEndereco(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString());
+        EnviaDadosPraView.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
+        EnviaDadosPraView.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
+        EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString()); 
+        EnviaDadosPraView.setMensagem("Visualização");
         EnviaDadosPraView.AlimentaCampos();
+        EnviaDadosPraView.DisativaCampos();
         EnviaDadosPraView.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_BtnVisualizarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new TelaAlterarCliente().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-    private void AtualizaTabelaClientes() throws SQLException{
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        TelaCadastroAlteracaoVisualizacaoClientes EnviaDadosPraView;
+        EnviaDadosPraView = new TelaCadastroAlteracaoVisualizacaoClientes();
+        EnviaDadosPraView.setId_cliente(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString());
+        EnviaDadosPraView.setNome(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 1).toString());
+        EnviaDadosPraView.setTelefone(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 2).toString());
+        EnviaDadosPraView.setCelular(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 3).toString());
+        EnviaDadosPraView.setCpfCnpj(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 4).toString());
+        EnviaDadosPraView.setEndereco(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString());
+        EnviaDadosPraView.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
+        EnviaDadosPraView.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
+        EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());         
+        EnviaDadosPraView.setMensagem("Alteração");
+        EnviaDadosPraView.AlimentaCampos();        
+        EnviaDadosPraView.setVisible(true);
+    }//GEN-LAST:event_BtnEditarActionPerformed
+    public void AtualizaTabelaClientes() throws SQLException{
         DefaultTableModel dm = new ClientesDAO().AlimentaTabelaClientes();
         TabelaClientes.setModel(dm);
     }
@@ -319,11 +338,11 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAdicionar;
+    private javax.swing.JButton BtnEditar;
+    private javax.swing.JButton BtnRemover;
+    private javax.swing.JButton BtnVisualizar;
     private javax.swing.JTable TabelaClientes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
