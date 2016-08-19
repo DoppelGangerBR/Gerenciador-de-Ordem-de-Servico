@@ -258,7 +258,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void BtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarActionPerformed
-        new TelaCadastroAlteracaoVisualizacaoClientes().setVisible(true);
+         new TelaCadastroAlteracaoVisualizacaoClientes().setVisible(true);
     }//GEN-LAST:event_BtnAdicionarActionPerformed
 
     private void BtnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVisualizarActionPerformed
