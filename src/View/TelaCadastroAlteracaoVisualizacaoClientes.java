@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.validaCadastroCliente;
+import Controller.ValidaCliente;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -343,7 +343,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
     }//GEN-LAST:event_OpcLimparCamposActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        CancelaCadastro();
+        CancelaCadastro();        
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
@@ -351,11 +351,16 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
             realizarCadastroAlteracao();
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+        }
+          
     }//GEN-LAST:event_BtnSalvarActionPerformed
-
+    public int AtualizaView(){
+        int atualiza = 1;
+        return atualiza;
+    }
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         CancelaCadastro();
+        
     }//GEN-LAST:event_formWindowClosing
 
     private void BtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimparActionPerformed
@@ -366,12 +371,17 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
         CancelaSimOuNao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?","Confirmação", JOptionPane.YES_NO_OPTION);
         if(CancelaSimOuNao == JOptionPane.YES_OPTION){
             this.dispose();
+            try {
+                new TelaMostraClientesCadastrados().setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     private void realizarCadastroAlteracao() throws SQLException{
         if(getId_cliente() == null){
         //Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado
-        validaCadastroCliente controle = new validaCadastroCliente();
+        ValidaCliente controle = new ValidaCliente();
         controle.setNome(TxtNome.getText());
         controle.setTelefone(TxtTelefone.getText());
         controle.setCelular(TxtCeluar.getText());
@@ -385,7 +395,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
         TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
         AtualizaTabela.AtualizaTabelaClientes();
         }else{
-            validaCadastroCliente controle = new validaCadastroCliente();
+            ValidaCliente controle = new ValidaCliente();
             controle.setId_cliente(getId_cliente());
             controle.setNome(TxtNome.getText());
             controle.setTelefone(TxtTelefone.getText());

@@ -4,7 +4,8 @@ import DAO.ClientesDAO;
 import View.TelaCadastroAlteracaoVisualizacaoClientes;
 import java.sql.SQLException;
 
-public class validaCadastroCliente {
+
+public class ValidaCliente {
     private String Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado,Mensagem,TituloMensagem,id_cliente;    
 
     
@@ -43,6 +44,11 @@ public class validaCadastroCliente {
                 AlteraCliente.AlteraDadosCliente();
             }
         }
+    }
+    public void removeCliente() throws SQLException{
+        ClientesDAO RemoCliente = new ClientesDAO();        
+        RemoCliente.setId_cliente(getId_cliente());
+        RemoCliente.removeCliente();
     }
 
     public String getId_cliente() {

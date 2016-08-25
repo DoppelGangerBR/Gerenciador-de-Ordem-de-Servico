@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.ValidaCliente;
 import DAO.ClientesDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,9 +23,10 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
      * Creates new form TelaMostraClientesCadastrados
      */
     public TelaMostraClientesCadastrados() throws SQLException {
-        
+
         initComponents();
         AtualizaTabelaClientes();
+        //As linhas abaixo servem para definir um tamanho padrão das colunas na tabela
         TabelaClientes.getColumnModel().getColumn(0).setMinWidth(50);
         TabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(50);
         TabelaClientes.getColumnModel().getColumn(0).setMaxWidth(50);
@@ -52,7 +54,9 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         TabelaClientes.getColumnModel().getColumn(8).setMinWidth(100);
         TabelaClientes.getColumnModel().getColumn(8).setPreferredWidth(100);
         TabelaClientes.getColumnModel().getColumn(8).setMaxWidth(100);
-        TabelaClientes.requestFocusInWindow();
+        TabelaClientes.changeSelection(0, 0, false, false);
+        //A linha acima serve para sempre que abrir a tabela, a primeira 
+        //linha ja venha selecionada automaticamente
     }
 
     /**
@@ -157,6 +161,11 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         BtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BtnRemover.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BtnRemover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRemoverActionPerformed(evt);
+            }
+        });
 
         BtnAdicionar.setBackground(new java.awt.Color(204, 204, 204));
         BtnAdicionar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -258,12 +267,15 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void BtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarActionPerformed
-         new TelaCadastroAlteracaoVisualizacaoClientes().setVisible(true);
+        TelaCadastroAlteracaoVisualizacaoClientes abreCadastro = new TelaCadastroAlteracaoVisualizacaoClientes();
+        dispose();
+        abreCadastro.setVisible(true);        
+        
     }//GEN-LAST:event_BtnAdicionarActionPerformed
 
     private void BtnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVisualizarActionPerformed
         TelaCadastroAlteracaoVisualizacaoClientes EnviaDadosPraView;
-        EnviaDadosPraView = new TelaCadastroAlteracaoVisualizacaoClientes();        
+        EnviaDadosPraView = new TelaCadastroAlteracaoVisualizacaoClientes();
         EnviaDadosPraView.setNome(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 1).toString());
         EnviaDadosPraView.setTelefone(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 2).toString());
         EnviaDadosPraView.setCelular(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 3).toString());
@@ -271,7 +283,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         EnviaDadosPraView.setEndereco(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString());
         EnviaDadosPraView.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
         EnviaDadosPraView.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
-        EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString()); 
+        EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());
         EnviaDadosPraView.setMensagem("Visualização");
         EnviaDadosPraView.AlimentaCampos();
         EnviaDadosPraView.DisativaCampos();
@@ -289,15 +301,59 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         EnviaDadosPraView.setEndereco(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString());
         EnviaDadosPraView.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
         EnviaDadosPraView.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
-        EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());         
+        EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());
         EnviaDadosPraView.setMensagem("Alteração");
-        EnviaDadosPraView.AlimentaCampos();        
+        EnviaDadosPraView.AlimentaCampos();
         EnviaDadosPraView.setVisible(true);
     }//GEN-LAST:event_BtnEditarActionPerformed
-    public void AtualizaTabelaClientes() throws SQLException{
+
+    private void BtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemoverActionPerformed
+        int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o cliente selecionado?","Confirmar exclusão", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+            try {
+                ValidaCliente removeCliente = new ValidaCliente();
+                removeCliente.setId_cliente(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString());                                                      
+                removeCliente.removeCliente();
+                AtualizaTabelaClientes();
+                TabelaClientes.changeSelection(0, 0, false, false);
+                TabelaClientes.getColumnModel().getColumn(0).setMinWidth(50);
+                TabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(50);
+                TabelaClientes.getColumnModel().getColumn(0).setMaxWidth(50);
+                TabelaClientes.getColumnModel().getColumn(1).setMinWidth(180);
+                TabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(180);
+                TabelaClientes.getColumnModel().getColumn(1).setMaxWidth(180);
+                TabelaClientes.getColumnModel().getColumn(2).setMinWidth(110);
+                TabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(110);
+                TabelaClientes.getColumnModel().getColumn(2).setMaxWidth(110);
+                TabelaClientes.getColumnModel().getColumn(3).setMinWidth(110);
+                TabelaClientes.getColumnModel().getColumn(3).setPreferredWidth(110);
+                TabelaClientes.getColumnModel().getColumn(3).setMaxWidth(110);
+                TabelaClientes.getColumnModel().getColumn(4).setMinWidth(125);
+                TabelaClientes.getColumnModel().getColumn(4).setPreferredWidth(125);
+                TabelaClientes.getColumnModel().getColumn(4).setMaxWidth(125);
+                TabelaClientes.getColumnModel().getColumn(5).setMinWidth(125);
+                TabelaClientes.getColumnModel().getColumn(5).setPreferredWidth(125);
+                TabelaClientes.getColumnModel().getColumn(5).setMaxWidth(125);
+                TabelaClientes.getColumnModel().getColumn(6).setMinWidth(125);
+                TabelaClientes.getColumnModel().getColumn(6).setPreferredWidth(125);
+                TabelaClientes.getColumnModel().getColumn(6).setMaxWidth(125);
+                TabelaClientes.getColumnModel().getColumn(7).setMinWidth(50);
+                TabelaClientes.getColumnModel().getColumn(7).setPreferredWidth(50);
+                TabelaClientes.getColumnModel().getColumn(7).setMaxWidth(50);
+                TabelaClientes.getColumnModel().getColumn(8).setMinWidth(100);
+                TabelaClientes.getColumnModel().getColumn(8).setPreferredWidth(100);
+                TabelaClientes.getColumnModel().getColumn(8).setMaxWidth(100);   
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaMostraClientesCadastrados.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_BtnRemoverActionPerformed
+    public void AtualizaTabelaClientes() throws SQLException {
         DefaultTableModel dm = new ClientesDAO().AlimentaTabelaClientes();
         TabelaClientes.setModel(dm);
     }
+
     /**
      * @param args the command line arguments
      */

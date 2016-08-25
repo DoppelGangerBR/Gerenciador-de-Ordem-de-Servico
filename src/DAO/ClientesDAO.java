@@ -1,7 +1,7 @@
 
 package DAO;
 
-import Controller.validaCadastroCliente;
+import Controller.ValidaCliente;
 import Model.EntidadeConexao;
 import View.TelaMostraClientesCadastrados;
 import java.sql.Connection;
@@ -26,10 +26,10 @@ public class ClientesDAO extends EntidadeConexao{
     }
     public void cadastraCliente()throws SQLException{
         Connection conexao = abreConexao();
-        validaCadastroCliente retornaStatusEMensagem = new validaCadastroCliente();
+        ValidaCliente retornaStatusEMensagem = new ValidaCliente();
         PreparedStatement prs = null;
-        String sql = "INSERT INTO cadastro_clientes(nome,telefone,celular,endereco,cpfcnpj,bairro,cidade,estado,numero) "
-                + "VALUES ('"+getNome()+"','"+getTelefone()+"','"+getCelular()+"','"+getEndereco()+"','"+getCpfCnpj()+"','"+getBairro()+"','"+getCidade()+"','"+getEstado()+"','"+getNumero()+"')";
+        String sql = "INSERT INTO cadastro_clientes(nome,telefone,celular,endereco,cpfcnpj,bairro,cidade,estado,numero,ativo) "
+                + "VALUES ('"+getNome()+"','"+getTelefone()+"','"+getCelular()+"','"+getEndereco()+"','"+getCpfCnpj()+"','"+getBairro()+"','"+getCidade()+"','"+getEstado()+"','"+getNumero()+"',1)";
         try{
             prs = conexao.prepareStatement(sql);
             prs.executeUpdate();
@@ -43,7 +43,10 @@ public class ClientesDAO extends EntidadeConexao{
             retornaStatusEMensagem.setStatusCadastro(statusCadastro);
             retornaStatusEMensagem.enviaStatusPraView();
             JOptionPane.showMessageDialog(null,e.getMessage());
-        }finally{            
+        }finally{
+            //TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
+            //AtualizaTabela.dispose();
+            //AtualizaTabela.setVisible(true);
             conexao.close();
         }
     }
@@ -61,8 +64,7 @@ public class ClientesDAO extends EntidadeConexao{
         dm.addColumn("Bairro");
         dm.addColumn("Numero");
         dm.addColumn("Cidade");
-        String sql = "SELECT * FROM cadastro_clientes";
-        
+        String sql = "SELECT * FROM cadastro_clientes WHERE ativo = 1";        
         try{            
             prs = conexao.prepareStatement(sql);
             rset = prs.executeQuery();
@@ -101,16 +103,28 @@ public class ClientesDAO extends EntidadeConexao{
             prs.executeUpdate();
             conexao.close();
             JOptionPane.showMessageDialog(null, "[OK] Alterado");
-            TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
-            AtualizaTabela.AtualizaTabelaClientes();
+            
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "[FALHA] Alteração");
             conexao.close();
         }finally{
+            TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
+            AtualizaTabela.AtualizaTabelaClientes();
             conexao.close();
         }
     }
-    
+    public void removeCliente() throws SQLException{
+        Connection conexao = abreConexao();
+        PreparedStatement prs;
+        String sql = "UPDATE cadastro_clientes SET ativo = 0 WHERE id_cliente ='"+getId_cliente()+"'";
+        try{
+            prs = conexao.prepareStatement(sql);
+            prs.executeUpdate();
+            conexao.close();            
+        }catch(SQLException e){
+            JOptionPane.showConfirmDialog(null, e.getMessage());
+        }
+    }
     
     public String getNome() {
         return Nome;
