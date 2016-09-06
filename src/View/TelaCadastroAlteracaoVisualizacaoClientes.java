@@ -352,7 +352,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadastroAlteracaoVisualizacaoClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
+
     }//GEN-LAST:event_BtnSalvarActionPerformed
     public int AtualizaView(){
         int atualiza = 1;
@@ -392,8 +392,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
         controle.setCidade(TxtCidade.getText());
         controle.setEstado(TxtEstado.getText());        
         controle.validaCampos();
-        TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
-        AtualizaTabela.AtualizaTabelaClientes();
+        
         }else{
             ValidaCliente controle = new ValidaCliente();
             controle.setId_cliente(getId_cliente());
@@ -406,9 +405,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
             controle.setBairro(TxtBairro.getText());
             controle.setCidade(TxtCidade.getText());
             controle.setEstado(TxtEstado.getText());        
-            controle.validaCampos();
-            TelaMostraClientesCadastrados AtualizaTabela = new TelaMostraClientesCadastrados();
-            AtualizaTabela.AtualizaTabelaClientes();
+            controle.validaCampos();            
         }       
         
     }

@@ -18,10 +18,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Alvaro
  */
 public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TelaMostraClientesCadastrados
-     */
+     String[] dadosClientes = new String[10];
+    
     public TelaMostraClientesCadastrados() throws SQLException {
 
         initComponents();
@@ -76,6 +74,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         BtnRemover = new javax.swing.JButton();
         BtnAdicionar = new javax.swing.JButton();
         BtnVisualizar = new javax.swing.JButton();
+        BtnSelecionarCliente = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -121,6 +120,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         });
         TabelaClientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         TabelaClientes.setGridColor(new java.awt.Color(204, 204, 204));
+        TabelaClientes.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TabelaClientes);
         if (TabelaClientes.getColumnModel().getColumnCount() > 0) {
             TabelaClientes.getColumnModel().getColumn(0).setResizable(false);
@@ -135,6 +135,8 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
             TabelaClientes.getColumnModel().getColumn(4).setPreferredWidth(100);
             TabelaClientes.getColumnModel().getColumn(5).setResizable(false);
             TabelaClientes.getColumnModel().getColumn(6).setResizable(false);
+            TabelaClientes.getColumnModel().getColumn(7).setResizable(false);
+            TabelaClientes.getColumnModel().getColumn(8).setResizable(false);
         }
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -146,7 +148,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Edit User Male-50.png"))); // NOI18N
         BtnEditar.setText("Editar");
         BtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnEditar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +160,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         BtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Remove User Male-48.png"))); // NOI18N
         BtnRemover.setText("Remover");
         BtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnRemover.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BtnRemover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BtnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +172,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         BtnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Add User Male-48.png"))); // NOI18N
         BtnAdicionar.setText("Adicionar");
         BtnAdicionar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnAdicionar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BtnAdicionar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,11 +184,22 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         BtnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Find User Male-48.png"))); // NOI18N
         BtnVisualizar.setText("Visualizar");
         BtnVisualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnVisualizar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BtnVisualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         BtnVisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnVisualizarActionPerformed(evt);
+            }
+        });
+
+        BtnSelecionarCliente.setBackground(new java.awt.Color(204, 204, 204));
+        BtnSelecionarCliente.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnSelecionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/select-128.png"))); // NOI18N
+        BtnSelecionarCliente.setText("<HTML> <HEAD> </HEAD> <center> Selecionar<br> Cliente </center> </BODY> </HTML>");
+        BtnSelecionarCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnSelecionarCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnSelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSelecionarClienteActionPerformed(evt);
             }
         });
 
@@ -201,15 +211,17 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(BtnAdicionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addComponent(BtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73)
+                        .addGap(37, 37, 37)
                         .addComponent(BtnEditar)
-                        .addGap(74, 74, 74)
-                        .addComponent(BtnVisualizar)))
+                        .addGap(33, 33, 33)
+                        .addComponent(BtnVisualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnSelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -219,17 +231,16 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnVisualizar)
-                            .addComponent(BtnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addComponent(BtnEditar))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                        .addComponent(BtnSelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(BtnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                    .addComponent(BtnVisualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(115, 115, 115))
         );
 
         jMenu1.setText("Opções");
@@ -284,9 +295,11 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         EnviaDadosPraView.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
         EnviaDadosPraView.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
         EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());
+        EnviaDadosPraView.setEstado(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 9).toString());
         EnviaDadosPraView.setMensagem("Visualização");
         EnviaDadosPraView.AlimentaCampos();
         EnviaDadosPraView.DisativaCampos();
+        dispose();
         EnviaDadosPraView.setVisible(true);
     }//GEN-LAST:event_BtnVisualizarActionPerformed
 
@@ -302,9 +315,11 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         EnviaDadosPraView.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
         EnviaDadosPraView.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
         EnviaDadosPraView.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());
+        EnviaDadosPraView.setEstado(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 9).toString());
         EnviaDadosPraView.setMensagem("Alteração");
         EnviaDadosPraView.AlimentaCampos();
         EnviaDadosPraView.setVisible(true);
+        dispose();
     }//GEN-LAST:event_BtnEditarActionPerformed
 
     private void BtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemoverActionPerformed
@@ -349,11 +364,32 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BtnRemoverActionPerformed
+    private void TabelaClientesMouseClicked(java.awt.event.MouseEvent evt){
+        if(evt.getClickCount() == 2 && evt.isConsumed()){
+            JOptionPane.showMessageDialog(null, "Double Click");
+        }
+    }
+    private void BtnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSelecionarClienteActionPerformed
+        
+        
+                
+    }//GEN-LAST:event_BtnSelecionarClienteActionPerformed
     public void AtualizaTabelaClientes() throws SQLException {
         DefaultTableModel dm = new ClientesDAO().AlimentaTabelaClientes();
         TabelaClientes.setModel(dm);
     }
-
+    public String[] retornaCliente(){      
+        dadosClientes[0] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString();
+        dadosClientes[1] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 1).toString();
+        dadosClientes[2] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 2).toString();
+        dadosClientes[3] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 3).toString();
+        dadosClientes[4] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 4).toString();
+        dadosClientes[5] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString();
+        dadosClientes[6] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString();
+        dadosClientes[7] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString();
+        dadosClientes[8] = TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString(); 
+        return dadosClientes;
+    }
     /**
      * @param args the command line arguments
      */
@@ -397,6 +433,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     private javax.swing.JButton BtnAdicionar;
     private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnRemover;
+    private javax.swing.JButton BtnSelecionarCliente;
     private javax.swing.JButton BtnVisualizar;
     private javax.swing.JTable TabelaClientes;
     private javax.swing.JLabel jLabel1;

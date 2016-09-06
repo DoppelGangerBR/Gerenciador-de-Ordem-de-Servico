@@ -64,6 +64,7 @@ public class ClientesDAO extends EntidadeConexao{
         dm.addColumn("Bairro");
         dm.addColumn("Numero");
         dm.addColumn("Cidade");
+        dm.addColumn("Estado");
         String sql = "SELECT * FROM cadastro_clientes WHERE ativo = 1";        
         try{            
             prs = conexao.prepareStatement(sql);
@@ -76,9 +77,10 @@ public class ClientesDAO extends EntidadeConexao{
                 String CpfCnpj      = rset.getString(6);
                 String endereco     = rset.getString(5);
                 String bairro       = rset.getString(7);
-                String numero       = rset.getString(10);
+                String numero       = rset.getString(11);
                 String cidade       = rset.getString(8);
-                dm.addRow(new String[]{IdCliente, NomeCliente,CelularC,TelefoneC,CpfCnpj,endereco,bairro,numero,cidade});
+                String estado       = rset.getString(9);
+                dm.addRow(new String[]{IdCliente, NomeCliente,CelularC,TelefoneC,CpfCnpj,endereco,bairro,numero,cidade,estado});
             }
             rset.close();
             prs.close();
