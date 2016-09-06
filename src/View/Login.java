@@ -6,6 +6,9 @@
 package View;
 
 import Controller.ValidaLoginUsuario;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author Alvaro
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame implements KeyListener{
     private String mensagem;
     private Boolean status;
 
@@ -41,7 +44,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();   
-        ImageIcon imgicon = new ImageIcon("imgs/Broom-52.png");
+        setIcon();
+        
         
     }
 
@@ -171,6 +175,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCancelarLoginActionPerformed
 
     private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
+        TentaLogin();
+    }//GEN-LAST:event_BtnEntrarActionPerformed
+    public void exibeMensagens(){
+        JOptionPane.showMessageDialog(null, getMensagem() , "Erro", 0);
+    }
+    private void TentaLogin(){
         ValidaLoginUsuario fazAutenticacao = new ValidaLoginUsuario();
         fazAutenticacao.setUsuario(TxtUsuario.getText());
         fazAutenticacao.setSenha(TxtSenha.getText());
@@ -180,9 +190,6 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_BtnEntrarActionPerformed
-    public void exibeMensagens(){
-        JOptionPane.showMessageDialog(null, getMensagem() , "Erro", 0);
     }
     /**
      * @param args the command line arguments
@@ -219,6 +226,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+
+    
     
     
 
@@ -235,4 +244,25 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/tccIcon.png")));
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            TentaLogin();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

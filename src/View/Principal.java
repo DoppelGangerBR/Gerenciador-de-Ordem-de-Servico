@@ -25,10 +25,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        
-        ImageIcon icone;
-        icone = new ImageIcon("imgs/Broom-16.png");        
-        this.setIconImage(icone.getImage());        
+        setIcon();
     }
 
     /**
@@ -214,6 +211,9 @@ public class Principal extends javax.swing.JFrame {
                 new Principal().setVisible(true);
             }
         });
+    }
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/tccIcon.png")));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

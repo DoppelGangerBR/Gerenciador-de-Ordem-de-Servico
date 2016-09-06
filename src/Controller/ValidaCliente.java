@@ -13,7 +13,7 @@ public class ValidaCliente {
     TelaCadastroAlteracaoVisualizacaoClientes retornoMensagens = new TelaCadastroAlteracaoVisualizacaoClientes();
     public void validaCampos() throws SQLException{
         if(getNome().equals("") || getTelefone().equals("") || getCpfCnpj().equals("") || getNome() == null || getTelefone() == null || getCpfCnpj() == null){
-            retornoMensagens.setStatusCadastro(false);
+            retornoMensagens.setStatus(false);
             retornoMensagens.setMensagem("Por favor, preencha todos os campos que possum (*)");
             retornoMensagens.exibeMensagens();
         }else{
@@ -60,7 +60,7 @@ public class ValidaCliente {
     }
     public void enviaStatusPraView(){
         TelaCadastroAlteracaoVisualizacaoClientes retornaStatus = new TelaCadastroAlteracaoVisualizacaoClientes();
-        retornaStatus.setStatusCadastro(getStatusCadastro());
+        retornaStatus.setStatus(getStatusCadastro());
         retornaStatus.exibeMensagens();
     }
 
