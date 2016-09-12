@@ -5,20 +5,22 @@
  */
 package View;
 
-import java.awt.Image;
+
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Alvaro
  */
-public class Principal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame implements KeyListener{
 
     /**
      * Creates new form Principal
@@ -26,6 +28,9 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setIcon();
+        setFocusable(true);
+        addKeyListener(this);
+        
     }
 
     /**
@@ -87,6 +92,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.setText("Ordem de Serviço");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/clipboard-icon20x20.png"))); // NOI18N
         jMenuItem1.setText("Nova ordem de serviço");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +102,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/clipboard-search20x20.png"))); // NOI18N
         jMenuItem2.setText("Buscar ordem de serviço");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +116,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setText("Clientes");
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Add User Male-48.png"))); // NOI18N
         jMenuItem3.setText("Cadastrar cliente");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,18 +172,22 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        fechaSoftware();
+    }//GEN-LAST:event_formWindowClosing
+    private void fechaSoftware(){
         int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja fechar o software?","Confirmação", JOptionPane.YES_NO_OPTION);
         if(confirma == JOptionPane.YES_OPTION){
             System.exit(0);
         }
-    }//GEN-LAST:event_formWindowClosing
-
+    }
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         try {
-            new TelaMostraClientesCadastrados().setVisible(true);
+            TelaMostraClientesCadastrados abreTelaClientesCadastraos = new TelaMostraClientesCadastrados();
+            abreTelaClientesCadastraos.setVisible(true);
+            
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
      
     /**
@@ -227,4 +239,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            fechaSoftware();
+        }
+    }
+
+    
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+    }
 }

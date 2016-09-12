@@ -77,7 +77,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         BtnRemover = new javax.swing.JButton();
         BtnAdicionar = new javax.swing.JButton();
         BtnVisualizar = new javax.swing.JButton();
-        BtnSelecionarCliente = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -199,18 +198,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
             }
         });
 
-        BtnSelecionarCliente.setBackground(new java.awt.Color(204, 204, 204));
-        BtnSelecionarCliente.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        BtnSelecionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/select-128.png"))); // NOI18N
-        BtnSelecionarCliente.setText("<HTML> <HEAD> </HEAD> <center> Selecionar<br> Cliente </center> </BODY> </HTML>");
-        BtnSelecionarCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnSelecionarCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        BtnSelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSelecionarClienteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -222,14 +209,12 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(BtnAdicionar)
-                        .addGap(27, 27, 27)
+                        .addGap(67, 67, 67)
                         .addComponent(BtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(BtnEditar)
-                        .addGap(33, 33, 33)
-                        .addComponent(BtnVisualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnSelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnEditar)
+                        .addGap(83, 83, 83)
+                        .addComponent(BtnVisualizar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -241,9 +226,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtnSelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(BtnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
@@ -384,11 +366,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnRemoverActionPerformed
     
-    private void BtnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSelecionarClienteActionPerformed
-        
-
-    }//GEN-LAST:event_BtnSelecionarClienteActionPerformed
-
     private void TabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaClientesMouseClicked
         if(isStatus() == true){
             retornaCliente();
@@ -464,7 +441,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     private javax.swing.JButton BtnAdicionar;
     private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnRemover;
-    private javax.swing.JButton BtnSelecionarCliente;
     private javax.swing.JButton BtnVisualizar;
     private javax.swing.JTable TabelaClientes;
     private javax.swing.JLabel jLabel1;

@@ -77,14 +77,12 @@
                       <Component id="jScrollPane1" alignment="0" pref="573" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="BtnAdicionar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                           <Component id="BtnRemover" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="BtnEditar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="BtnVisualizar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="BtnSelecionarCliente" min="-2" pref="93" max="-2" attributes="0"/>
+                          <Component id="BtnEditar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                          <Component id="BtnVisualizar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -100,10 +98,6 @@
                   <Component id="jScrollPane1" min="-2" pref="281" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="BtnSelecionarCliente" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
                       <Component id="BtnAdicionar" alignment="1" max="32767" attributes="0"/>
                       <Component id="BtnRemover" alignment="1" max="32767" attributes="0"/>
                       <Component id="BtnEditar" alignment="1" pref="99" max="32767" attributes="0"/>
@@ -287,25 +281,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnVisualizarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="BtnSelecionarCliente">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Calibri" size="14" style="0"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/View/imgs/select-128.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&lt;HTML&gt; &lt;HEAD&gt; &lt;/HEAD&gt; &lt;center&gt; Selecionar&lt;br&gt; Cliente &lt;/center&gt; &lt;/BODY&gt; &lt;/HTML&gt;"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSelecionarClienteActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
