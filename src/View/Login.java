@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ValidaLoginUsuario;
+import DAO.OrdemServicoDAO;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -152,7 +153,9 @@ public class Login extends javax.swing.JFrame implements KeyListener {
         ValidaLoginUsuario fazAutenticacao = new ValidaLoginUsuario();
         fazAutenticacao.setUsuario(TxtUsuario.getText());
         fazAutenticacao.setSenha(TxtSenha.getText());
+        OrdemServicoDAO verificaDatas = new OrdemServicoDAO();
         try {
+            verificaDatas.VerificaDataESetaStatus();
             this.dispose();
             fazAutenticacao.ValidaLogin();
         } catch (SQLException ex) {

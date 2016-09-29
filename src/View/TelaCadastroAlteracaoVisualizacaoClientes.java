@@ -354,10 +354,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
         }
 
     }//GEN-LAST:event_BtnSalvarActionPerformed
-    public int AtualizaView() {
-        int atualiza = 1;
-        return atualiza;
-    }
+    
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         CancelaCadastro();
 

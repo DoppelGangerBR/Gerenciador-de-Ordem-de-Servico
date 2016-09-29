@@ -5,6 +5,7 @@ import View.TelaCadastroAlteracaoVisualizacaoClientes;
 import java.sql.SQLException;
 
 
+
 public class ValidaCliente {
     private String Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado,Mensagem,TituloMensagem,id_cliente;    
 

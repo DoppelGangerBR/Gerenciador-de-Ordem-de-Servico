@@ -2,19 +2,25 @@ package View;
 
 import Controller.ValidaOS;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
+public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyListener{
     String[] dadosOs = new String[9];
-    String Nome,Endereco,Bairro,Cidade,Numero,Telefone,Celular,Cpf,id;
+    private String Nome,Endereco,Bairro,Cidade,Numero,Telefone,Celular,Cpf,id;
+    private String Equipamento,Marca,Modelo,Acessorio,NumSerie,ProblemaReclamado ;
+    private int id_os;   
     public TelaNovaOrdemDeServico() {
         initComponents();
         setIcon();
+        addKeyListener(this);
+        TxtProblemaReclamadoOS.addKeyListener(this);
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -55,7 +61,8 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
         TxtAcessorioObsOs = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TxtProblemaReclamadoOS = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        BtnSalvar = new javax.swing.JButton();
+        BtnCancelar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -169,7 +176,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtNumeroEndCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,10 +343,21 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnSalvar.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        BtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Save Close-50.png"))); // NOI18N
+        BtnSalvar.setText("Salvar");
+        BtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnSalvarActionPerformed(evt);
+            }
+        });
+
+        BtnCancelar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Cancel-48.png"))); // NOI18N
+        BtnCancelar.setText("Cancelar");
+        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCancelarActionPerformed(evt);
             }
         });
 
@@ -351,12 +369,14 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(78, 78, 78))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,9 +385,11 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnSalvar)
+                    .addComponent(BtnCancelar))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -394,15 +416,18 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int ConfirmaSaida = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar a operação?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        if(ConfirmaSaida == JOptionPane.YES_OPTION){
-            this.dispose();
-        }
+        ConfirmaSaida();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
+        SalvaOs();       
+    }//GEN-LAST:event_BtnSalvarActionPerformed
+    private void SalvaOs(){
         ValidaOS controllerOs = new ValidaOS();
-        controllerOs.setIdCliente(Integer.parseInt(getId()));
+        if((getId()) == null){
+            JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado\nPor favor, tente novamente!");
+        }else{
+            controllerOs.setIdCliente(Integer.parseInt(getId()));        
         controllerOs.setNomeCliente(TxtNomeCliente.getText());
         controllerOs.setEnderecoCliente(TxtEnderecoCliente.getText());
         controllerOs.setNumeroEnderecoCliente(TxtNumeroEndCliente.getText());
@@ -417,14 +442,13 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
         controllerOs.setNumeroSerieOs(TxtNumSerieEquipOs.getText());
         controllerOs.setAcessorioObservacaoOs(TxtAcessorioObsOs.getText());
         controllerOs.setProblemaReclamadoOs(TxtProblemaReclamadoOS.getText());
-        try {
-            controllerOs.VerificaCamposObrigatorios();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                controllerOs.VerificaCamposObrigatorios();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-    
+    }
     private void BtnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscaClienteActionPerformed
         try {
             TelaMostraClientesCadastrados selecionaCliente = new TelaMostraClientesCadastrados();
@@ -435,6 +459,15 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
             Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnBuscaClienteActionPerformed
+    private void ConfirmaSaida(){
+        int x = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar a abertura da OS?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if(x == JOptionPane.YES_OPTION){
+            dispose();
+        }
+    }
+    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
+        ConfirmaSaida();
+    }//GEN-LAST:event_BtnCancelarActionPerformed
     public void preencheCampos(){
         TxtTelefone.setText(getTelefone());
         TxtNomeCliente.setText(getNome());        
@@ -444,6 +477,41 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
         TxtBairroCliente.setText(getBairro());
         TxtNumeroEndCliente.setText(getNumero());
         TxtCidadeCliente.setText(getCidade());
+    }
+    
+    public void PreencheCampos(){
+        TravaCampos();
+        LabelNumeroOs.setText(Integer.toString(getId_os()));
+        TxtNomeCliente.setText(getNome());
+        TxtAcessorioObsOs.setText(getAcessorio());
+        TxtBairroCliente.setText(getBairro());
+        TxtCelularCliente.setText(getCelular());
+        TxtCidadeCliente.setText(getCidade());
+        TxtCpfCnpj.setText(getCpf());
+        TxtEnderecoCliente.setText(getEndereco());
+        TxtEquipOs.setText(getEquipamento());
+        TxtMarcaEquipOs.setText(getMarca());
+        TxtModelEquipOs.setText(getModelo());
+        TxtNumSerieEquipOs.setText(getNumSerie());
+        TxtNumeroEndCliente.setText(getNumero());
+        TxtProblemaReclamadoOS.setText(getProblemaReclamado());
+        TxtTelefone.setText(getTelefone());        
+    }
+    public void TravaCampos(){
+        TxtNomeCliente.setEditable(false);
+        TxtAcessorioObsOs.setEditable(false);
+        TxtBairroCliente.setEditable(false);
+        TxtCelularCliente.setEditable(false);
+        TxtCidadeCliente.setEditable(false);
+        TxtCpfCnpj.setEditable(false);
+        TxtEnderecoCliente.setEditable(false);
+        TxtEquipOs.setEditable(false);
+        TxtMarcaEquipOs.setEditable(false);
+        TxtModelEquipOs.setEditable(false);
+        TxtNumSerieEquipOs.setEditable(false);
+        TxtNumeroEndCliente.setEditable(false);
+        TxtProblemaReclamadoOS.setEditable(false);
+        TxtTelefone.setEditable(false);
     }
     private void limpaCampos(){
         TxtNomeCliente.setText("");
@@ -489,6 +557,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
             }
         });
     }
+    
     
 
     public String[] getDadosOs() {
@@ -571,9 +640,65 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/clipboard-icon.png")));
     }
+    public String getEquipamento() {
+        return Equipamento;
+    }
+
+    public void setEquipamento(String Equipamento) {
+        this.Equipamento = Equipamento;
+    }
+
+    public String getMarca() {
+        return Marca;
+    }
+
+    public void setMarca(String Marca) {
+        this.Marca = Marca;
+    }
+
+    public String getModelo() {
+        return Modelo;
+    }
+
+    public void setModelo(String Modelo) {
+        this.Modelo = Modelo;
+    }
+
+    public String getAcessorio() {
+        return Acessorio;
+    }
+
+    public void setAcessorio(String Acessorio) {
+        this.Acessorio = Acessorio;
+    }
+
+    public String getNumSerie() {
+        return NumSerie;
+    }
+
+    public void setNumSerie(String NumSerie) {
+        this.NumSerie = NumSerie;
+    }
+
+    public String getProblemaReclamado() {
+        return ProblemaReclamado;
+    }
+
+    public void setProblemaReclamado(String ProblemaReclamado) {
+        this.ProblemaReclamado = ProblemaReclamado;
+    }
+    public int getId_os() {
+        return id_os;
+    }
+
+    public void setId_os(int id_os) {
+        this.id_os = id_os;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscaCliente;
+    private javax.swing.JButton BtnCancelar;
+    private javax.swing.JButton BtnSalvar;
     private javax.swing.JLabel LabelNumeroOs;
     private javax.swing.JTextField TxtAcessorioObsOs;
     private javax.swing.JTextField TxtBairroCliente;
@@ -589,7 +714,6 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNumeroEndCliente;
     private javax.swing.JTextArea TxtProblemaReclamadoOS;
     private javax.swing.JFormattedTextField TxtTelefone;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -613,4 +737,24 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            SalvaOs();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            ConfirmaSaida();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+    }
 }

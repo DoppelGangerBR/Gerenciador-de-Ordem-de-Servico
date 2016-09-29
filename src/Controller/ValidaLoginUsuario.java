@@ -1,7 +1,7 @@
 
 package Controller;
 
-import Model.EntidadeConexao;
+
 import DAO.UsuariosDAO;
 import View.Login;
 import View.Principal;

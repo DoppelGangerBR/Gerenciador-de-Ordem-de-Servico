@@ -10,6 +10,9 @@ public class ValidaOS {
     private String EquipamentoOs,MarcaEquipOs,ModeloEquipOs,NumeroSerieOs,AcessorioObservacaoOs,ProblemaReclamadoOs;
     private int idUsuario;
     private int idCliente;
+    private String id_os;
+
+    
     private String data;
     OrdemServicoDAO EnviaOSproBanco = new OrdemServicoDAO();
     public ValidaOS() {
@@ -31,6 +34,11 @@ public class ValidaOS {
             JOptionPane.showMessageDialog(null, "OK, passou pelo Controller");
         }
         
+    }
+    public void fechaOs() throws SQLException{
+        OrdemServicoDAO fechaOs = new OrdemServicoDAO();
+        fechaOs.setId_os(getId_os());
+        fechaOs.fechaOs();
     }
 
     public int getIdUsuario() {
@@ -177,6 +185,13 @@ public class ValidaOS {
 
     public void setProblemaReclamadoOs(String ProblemaReclamadoOs) {
         this.ProblemaReclamadoOs = ProblemaReclamadoOs;
+    }
+    public String getId_os() {
+        return id_os;
+    }
+
+    public void setId_os(String id_os) {
+        this.id_os = id_os;
     }
     
 }
