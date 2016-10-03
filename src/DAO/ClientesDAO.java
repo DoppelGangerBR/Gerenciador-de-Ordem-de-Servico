@@ -60,7 +60,7 @@ public class ClientesDAO extends EntidadeConexao{
         dm.addColumn("Numero");
         dm.addColumn("Cidade");
         dm.addColumn("Estado");
-        String sql = "SELECT * FROM cadastro_clientes WHERE ativo = 1";        
+        String sql = getSql();        
         try{            
             prs = conexao.prepareStatement(sql);
             rset = prs.executeQuery();

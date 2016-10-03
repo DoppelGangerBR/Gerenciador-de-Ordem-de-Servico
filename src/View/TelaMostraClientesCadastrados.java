@@ -380,12 +380,19 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     }//GEN-LAST:event_TabelaClientesMouseClicked
 
     private void BtnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscaClienteActionPerformed
+        ClientesDAO dm = new ClientesDAO();
+        dm.setSql("SELECT * FROM cadastro_clientes WHERE nome LIKE '%"+TxtBuscaCliente.getText()+"%' and ativo = 1");
+        try {
+            TabelaClientes.setModel(dm.AlimentaTabelaClientes());            
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaMostraClientesCadastrados.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_BtnBuscaClienteActionPerformed
     public void AtualizaTabelaClientes() throws SQLException {        
-        DefaultTableModel dm = new ClientesDAO().AlimentaTabelaClientes();
-        
-        TabelaClientes.setModel(dm);
+        ClientesDAO dm = new ClientesDAO();
+        dm.setSql("SELECT * FROM cadastro_clientes WHERE ativo = 1");
+        TabelaClientes.setModel(dm.AlimentaTabelaClientes());
     }
     
 
