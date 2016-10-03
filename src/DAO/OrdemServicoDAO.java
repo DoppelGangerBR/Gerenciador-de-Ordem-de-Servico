@@ -18,6 +18,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
     private int idCliente;
     private String id_os;
     private String data;
+    private String sql;
 
     public void GravaOs() throws SQLException {
         DatasHoras dataAtual = new DatasHoras();
@@ -91,7 +92,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
                 int dif = rset.getInt(1);
                 int id_os = rset.getInt(2);
                 int aberto_fechado = rset.getInt(3);
-                if (aberto_fechado == 1) {
+                if (aberto_fechado != 0) {
                     if (dif < -2 && dif > -6) {
                         sql = "UPDATE ordem_servico SET status_os = 2 WHERE id_os = '" + id_os + "'";
                         stmt2.executeUpdate(sql);
@@ -108,7 +109,6 @@ public class OrdemServicoDAO extends EntidadeConexao {
                 }else if(aberto_fechado == 0){
                     System.err.println("A O.S "+id_os+" ESTA FECHADA e não sera alterada");
                 }
-                System.err.println("ID: "+id_os+"\nAtraso: "+dif);
                 
 
             }
@@ -122,22 +122,13 @@ public class OrdemServicoDAO extends EntidadeConexao {
         Connection conexao = abreConexao();
         try{
             String sql = "UPDATE ordem_servico SET aberta_fechada = 0 WHERE id_os = '"+getId_os()+"'";
-            PreparedStatement prs = null;
+            PreparedStatement prs;
             prs = conexao.prepareStatement(sql);
             prs.executeUpdate();
-            conexao.close();
-            JOptionPane.showMessageDialog(null, "O.S Finalizada com sucesso!");
+            JOptionPane.showMessageDialog(null, "OS finalizada com sucesso!");
         }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "ERRO "+e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }
-
-    public String getId_os() {
-        return id_os;
-    }
-
-    public void setId_os(String id_os) {
-        this.id_os = id_os;
     }
 
     public String getNomeCliente() {
@@ -267,5 +258,13 @@ public class OrdemServicoDAO extends EntidadeConexao {
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
+    
+    public String getId_os() {
+        return id_os;
+    }
+
+    public void setId_os(String id_os) {
+        this.id_os = id_os;
+    }    
 
 }

@@ -159,7 +159,7 @@ public class Principal extends javax.swing.JFrame implements KeyListener{
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try {
-            new TelaVisualizaOs().setVisible(true);
+            new TelaMostraOrdens().setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }

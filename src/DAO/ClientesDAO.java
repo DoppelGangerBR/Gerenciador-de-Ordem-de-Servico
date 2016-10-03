@@ -16,14 +16,9 @@ public class ClientesDAO extends EntidadeConexao{
     private String Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado;    
     private Boolean statusCadastro;
     private String id_cliente;
+    private String sql;
 
-    public String getId_cliente() {
-        return id_cliente;
-    }
-
-    public void setId_cliente(String id_cliente) {
-        this.id_cliente = id_cliente;
-    }
+    
     public void cadastraCliente()throws SQLException{
         Connection conexao = abreConexao();
         ValidaCliente retornaStatusEMensagem = new ValidaCliente();
@@ -127,7 +122,41 @@ public class ClientesDAO extends EntidadeConexao{
             JOptionPane.showConfirmDialog(null, e.getMessage());
         }
     }
-    
+    /**public DefaultTableModel BuscaDinamicaClientes()throws SQLException{
+        Connection conexao = abreConexao();
+        DefaultTableModel dm = new DefaultTableModel();
+        try{
+            String SQL = "SELECT * FROM cadastro_clientes WHERE nome LIKE '%"+getNome()+"%' and ativo = 1";
+            PreparedStatement prs;
+            ResultSet rset;
+            prs = conexao.prepareStatement(SQL);
+            rset = prs.executeQuery();
+            while(rset.next()){
+                String IdCliente     = rset.getString(1);
+                String NomeCliente   = rset.getString(2);
+                String CelularC     = rset.getString(3);
+                String TelefoneC     = rset.getString(4);
+                String CpfCnpj      = rset.getString(6);
+                String endereco     = rset.getString(5);
+                String bairro       = rset.getString(7);
+                String numero       = rset.getString(11);
+                String cidade       = rset.getString(8);
+                String estado       = rset.getString(9);
+                dm.addRow(new String[]{IdCliente, NomeCliente,CelularC,TelefoneC,CpfCnpj,endereco,bairro,numero,cidade,estado});
+                System.out.println(IdCliente+NomeCliente+CelularC+TelefoneC+CpfCnpj+endereco+bairro+numero+cidade+estado);
+            }
+            rset.close();
+            prs.close();
+            conexao.close();
+            return dm;
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro"+e.getMessage());
+        }
+        return null;
+    }**/
+    public void FechaOs(){        
+    }
     public String getNome() {
         return Nome;
     }
@@ -198,6 +227,20 @@ public class ClientesDAO extends EntidadeConexao{
 
     public void setEstado(String Estado) {
         this.Estado = Estado;
+    }
+    public String getSql() {
+        return sql;
+    }
+
+    public void setSql(String sql) {
+        this.sql = sql;
+    }
+    public String getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(String id_cliente) {
+        this.id_cliente = id_cliente;
     }
     
     

@@ -48,6 +48,9 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         BtnRemover = new javax.swing.JButton();
         BtnAdicionar = new javax.swing.JButton();
         BtnVisualizar = new javax.swing.JButton();
+        BtnBuscaCliente = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        TxtBuscaCliente = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -169,6 +172,19 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
             }
         });
 
+        BtnBuscaCliente.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnBuscaCliente.setText("Buscar");
+        BtnBuscaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscaClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel2.setText("Buscar cliente:");
+
+        TxtBuscaCliente.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -185,7 +201,14 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnEditar)
                         .addGap(83, 83, 83)
-                        .addComponent(BtnVisualizar)))
+                        .addComponent(BtnVisualizar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TxtBuscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnBuscaCliente)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -193,15 +216,20 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnBuscaCliente)
+                    .addComponent(jLabel2)
+                    .addComponent(TxtBuscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                    .addComponent(BtnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                     .addComponent(BtnVisualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(115, 115, 115))
+                .addGap(88, 88, 88))
         );
 
         jMenu1.setText("Opções");
@@ -350,8 +378,13 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         }
              
     }//GEN-LAST:event_TabelaClientesMouseClicked
+
+    private void BtnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscaClienteActionPerformed
+        
+    }//GEN-LAST:event_BtnBuscaClienteActionPerformed
     public void AtualizaTabelaClientes() throws SQLException {        
         DefaultTableModel dm = new ClientesDAO().AlimentaTabelaClientes();
+        
         TabelaClientes.setModel(dm);
     }
     
@@ -416,11 +449,14 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAdicionar;
+    private javax.swing.JButton BtnBuscaCliente;
     private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnRemover;
     private javax.swing.JButton BtnVisualizar;
     private javax.swing.JTable TabelaClientes;
+    private javax.swing.JTextField TxtBuscaCliente;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
