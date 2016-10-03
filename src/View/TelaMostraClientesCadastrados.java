@@ -8,6 +8,8 @@ package View;
 import Controller.ValidaCliente;
 import DAO.ClientesDAO;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,17 +20,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Alvaro
  */
-public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
+public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements KeyListener {
 
     String[] dadosClientes = new String[10];
     boolean status = false;
+
     public TelaMostraClientesCadastrados() throws SQLException {
-        
+
         initComponents();
         AtualizaTabelaClientes();
-        setIcon();        
-        AjustaTabela();        
-        
+        setIcon();
+        AjustaTabela();
+        TxtBuscaCliente.addKeyListener(this);
+
     }
 
     /**
@@ -270,8 +274,8 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         TelaCadastroAlteracaoVisualizacaoClientes abreCadastro = new TelaCadastroAlteracaoVisualizacaoClientes();
         dispose();
         abreCadastro.setStatus(true);
-        abreCadastro.setVisible(true);        
-        
+        abreCadastro.setVisible(true);
+
     }//GEN-LAST:event_BtnAdicionarActionPerformed
 
     private void BtnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVisualizarActionPerformed
@@ -321,40 +325,41 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    private void AjustaTabela() throws SQLException{
-                AtualizaTabelaClientes();
-                //As linhas abaixo servem para definir um tamanho padrão das colunas na tabela
-                TabelaClientes.changeSelection(0, 0, false, false);
-                TabelaClientes.getColumnModel().getColumn(0).setMinWidth(50);
-                TabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(50);
-                TabelaClientes.getColumnModel().getColumn(0).setMaxWidth(50);
-                TabelaClientes.getColumnModel().getColumn(1).setMinWidth(180);
-                TabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(180);
-                TabelaClientes.getColumnModel().getColumn(1).setMaxWidth(180);
-                TabelaClientes.getColumnModel().getColumn(2).setMinWidth(110);
-                TabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(110);
-                TabelaClientes.getColumnModel().getColumn(2).setMaxWidth(110);
-                TabelaClientes.getColumnModel().getColumn(3).setMinWidth(110);
-                TabelaClientes.getColumnModel().getColumn(3).setPreferredWidth(110);
-                TabelaClientes.getColumnModel().getColumn(3).setMaxWidth(110);
-                TabelaClientes.getColumnModel().getColumn(4).setMinWidth(125);
-                TabelaClientes.getColumnModel().getColumn(4).setPreferredWidth(125);
-                TabelaClientes.getColumnModel().getColumn(4).setMaxWidth(125);
-                TabelaClientes.getColumnModel().getColumn(5).setMinWidth(125);
-                TabelaClientes.getColumnModel().getColumn(5).setPreferredWidth(125);
-                TabelaClientes.getColumnModel().getColumn(5).setMaxWidth(125);
-                TabelaClientes.getColumnModel().getColumn(6).setMinWidth(125);
-                TabelaClientes.getColumnModel().getColumn(6).setPreferredWidth(125);
-                TabelaClientes.getColumnModel().getColumn(6).setMaxWidth(125);
-                TabelaClientes.getColumnModel().getColumn(7).setMinWidth(50);
-                TabelaClientes.getColumnModel().getColumn(7).setPreferredWidth(50);
-                TabelaClientes.getColumnModel().getColumn(7).setMaxWidth(50);
-                TabelaClientes.getColumnModel().getColumn(8).setMinWidth(100);
-                TabelaClientes.getColumnModel().getColumn(8).setPreferredWidth(100);
-                TabelaClientes.getColumnModel().getColumn(8).setMaxWidth(100);
-                TabelaClientes.changeSelection(0, 0, false, false);
-                //A linha acima serve para sempre que abrir a tabela, a primeira 
-                //linha ja venha selecionada automaticamente
+
+    private void AjustaTabela() throws SQLException {
+        AtualizaTabelaClientes();
+        //As linhas abaixo servem para definir um tamanho padrão das colunas na tabela
+        TabelaClientes.changeSelection(0, 0, false, false);
+        TabelaClientes.getColumnModel().getColumn(0).setMinWidth(50);
+        TabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(50);
+        TabelaClientes.getColumnModel().getColumn(0).setMaxWidth(50);
+        TabelaClientes.getColumnModel().getColumn(1).setMinWidth(180);
+        TabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(180);
+        TabelaClientes.getColumnModel().getColumn(1).setMaxWidth(180);
+        TabelaClientes.getColumnModel().getColumn(2).setMinWidth(110);
+        TabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(110);
+        TabelaClientes.getColumnModel().getColumn(2).setMaxWidth(110);
+        TabelaClientes.getColumnModel().getColumn(3).setMinWidth(110);
+        TabelaClientes.getColumnModel().getColumn(3).setPreferredWidth(110);
+        TabelaClientes.getColumnModel().getColumn(3).setMaxWidth(110);
+        TabelaClientes.getColumnModel().getColumn(4).setMinWidth(125);
+        TabelaClientes.getColumnModel().getColumn(4).setPreferredWidth(125);
+        TabelaClientes.getColumnModel().getColumn(4).setMaxWidth(125);
+        TabelaClientes.getColumnModel().getColumn(5).setMinWidth(125);
+        TabelaClientes.getColumnModel().getColumn(5).setPreferredWidth(125);
+        TabelaClientes.getColumnModel().getColumn(5).setMaxWidth(125);
+        TabelaClientes.getColumnModel().getColumn(6).setMinWidth(125);
+        TabelaClientes.getColumnModel().getColumn(6).setPreferredWidth(125);
+        TabelaClientes.getColumnModel().getColumn(6).setMaxWidth(125);
+        TabelaClientes.getColumnModel().getColumn(7).setMinWidth(50);
+        TabelaClientes.getColumnModel().getColumn(7).setPreferredWidth(50);
+        TabelaClientes.getColumnModel().getColumn(7).setMaxWidth(50);
+        TabelaClientes.getColumnModel().getColumn(8).setMinWidth(100);
+        TabelaClientes.getColumnModel().getColumn(8).setPreferredWidth(100);
+        TabelaClientes.getColumnModel().getColumn(8).setMaxWidth(100);
+        TabelaClientes.changeSelection(0, 0, false, false);
+        //A linha acima serve para sempre que abrir a tabela, a primeira 
+        //linha ja venha selecionada automaticamente
     }
 
     private void BtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemoverActionPerformed
@@ -362,7 +367,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         if (resposta == JOptionPane.YES_OPTION) {
             try {
                 ValidaCliente removeCliente = new ValidaCliente();
-                removeCliente.setId_cliente(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString());                
+                removeCliente.setId_cliente(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString());
                 removeCliente.removeCliente();
                 AjustaTabela();
             } catch (SQLException ex) {
@@ -371,45 +376,47 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BtnRemoverActionPerformed
-    
+
     private void TabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaClientesMouseClicked
-        if(isStatus() == true){
+        if (isStatus() == true) {
             retornaCliente();
         }
-             
+
     }//GEN-LAST:event_TabelaClientesMouseClicked
 
     private void BtnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscaClienteActionPerformed
+        BuscaCliente();
+    }//GEN-LAST:event_BtnBuscaClienteActionPerformed
+    private void BuscaCliente() {
         ClientesDAO dm = new ClientesDAO();
-        dm.setSql("SELECT * FROM cadastro_clientes WHERE nome LIKE '%"+TxtBuscaCliente.getText()+"%' and ativo = 1");
+        dm.setSql("SELECT * FROM cadastro_clientes WHERE nome LIKE '%" + TxtBuscaCliente.getText() + "%' and ativo = 1");
         try {
-            TabelaClientes.setModel(dm.AlimentaTabelaClientes());            
+            TabelaClientes.setModel(dm.AlimentaTabelaClientes());
         } catch (SQLException ex) {
             Logger.getLogger(TelaMostraClientesCadastrados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }//GEN-LAST:event_BtnBuscaClienteActionPerformed
-    public void AtualizaTabelaClientes() throws SQLException {        
+    }
+
+    public void AtualizaTabelaClientes() throws SQLException {
         ClientesDAO dm = new ClientesDAO();
         dm.setSql("SELECT * FROM cadastro_clientes WHERE ativo = 1");
         TabelaClientes.setModel(dm.AlimentaTabelaClientes());
     }
-    
 
     private void retornaCliente() {
         TelaNovaOrdemDeServico retornaOsComDados = new TelaNovaOrdemDeServico();
-        retornaOsComDados.setId(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString()); 
+        retornaOsComDados.setId(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString());
         retornaOsComDados.setNome(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 1).toString());
         retornaOsComDados.setTelefone(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 2).toString());
         retornaOsComDados.setCelular(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 3).toString());
         retornaOsComDados.setCpf(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 4).toString());
         retornaOsComDados.setEndereco(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 5).toString());
         retornaOsComDados.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
-        retornaOsComDados.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(),7).toString());
+        retornaOsComDados.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
         retornaOsComDados.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());
-        retornaOsComDados.preencheCampos();        
+        retornaOsComDados.preencheCampos();
         retornaOsComDados.setVisible(true);
-        dispose();        
+        dispose();
     }
 
     /**
@@ -450,6 +457,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
             }
         });
     }
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/User-100.png")));
     }
@@ -470,4 +478,21 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            BuscaCliente();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }
