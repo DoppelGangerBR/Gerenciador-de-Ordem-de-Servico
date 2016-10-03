@@ -327,7 +327,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
     }
 
     private void AjustaTabela() throws SQLException {
-        AtualizaTabelaClientes();
+        
         //As linhas abaixo servem para definir um tamanho padrão das colunas na tabela
         TabelaClientes.changeSelection(0, 0, false, false);
         TabelaClientes.getColumnModel().getColumn(0).setMinWidth(50);
@@ -392,6 +392,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
         dm.setSql("SELECT * FROM cadastro_clientes WHERE nome LIKE '%" + TxtBuscaCliente.getText() + "%' and ativo = 1");
         try {
             TabelaClientes.setModel(dm.AlimentaTabelaClientes());
+            AjustaTabela();
         } catch (SQLException ex) {
             Logger.getLogger(TelaMostraClientesCadastrados.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -481,7 +482,8 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        BuscaCliente();
+        
     }
 
     @Override
