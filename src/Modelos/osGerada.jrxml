@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="osGerada" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9dcee6e4-873e-4297-b9d9-fc2e40961873">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT numero_os,nomecliente,telefone1,telefone2,hr_os,marcaproduto,detalheproduto,modeloproduto FROM ordem,detalhesproduto
+where numero_os = fk_cod_ordem]]>
+	</queryString>
+	<field name="numero_os" class="java.lang.Integer"/>
+	<field name="nomecliente" class="java.lang.String"/>
+	<field name="telefone1" class="java.lang.String"/>
+	<field name="telefone2" class="java.lang.String"/>
+	<field name="hr_os" class="java.lang.String"/>
+	<field name="marcaproduto" class="java.lang.String"/>
+	<field name="detalheproduto" class="java.lang.String"/>
+	<field name="modeloproduto" class="java.lang.String"/>
+	<group name="numero_os">
+		<groupExpression><![CDATA[$F{numero_os}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="157" height="78" uuid="813a826d-a421-465b-9cfa-5ed7bbec3d2a"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="0" rightPadding="10"/>
+				<imageExpression><![CDATA["C:\\geraOs\\versão 0.6\\logo mega.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="155" y="0" width="277" height="20" uuid="68a205b4-68fc-4df1-a059-09fda059b1f9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MEGA INFORMATICA E TECNOLOGIA LTDA-ME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="20" width="277" height="20" uuid="e614516a-d92d-45e4-b676-4f8650cad85f"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[        AV. DAS FIGUEIRAS, 926 - CENTRO - SINOP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="31" width="277" height="26" uuid="9e7c3da8-5941-49c9-acd7-7401a87936b8"/>
+				<box topPadding="0" bottomPadding="2"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[    CNPJ: 20259451000155     Inscr.Estadual: 135429285]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="44" width="146" height="27" uuid="aa7f763a-af15-41b7-a683-b05728f7ee7b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fone: (66) 3531-6311]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="438" y="27" width="43" height="17" uuid="fb1a7696-71ea-4608-a055-bac70672b661"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OS Nº]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="481" y="27" width="57" height="17" uuid="0b45732e-5526-4d6a-bf46-2e0c4e93909f"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="51" width="43" height="20" uuid="c78463b5-4e96-4e67-8ac1-89639c0dbe08"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="438" y="0" width="127" height="20" uuid="943a10a1-9b03-4715-a041-63a6c26f3cf7"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ordem de Serviço]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="481" y="51" width="74" height="20" uuid="085ce0f6-b557-4140-bf42-caa8e8a80ce4"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="436" y="0" width="117" height="22" uuid="7890b695-b8cc-4d0a-b75e-aa54621524d8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="436" y="51" width="117" height="27" uuid="218371d7-1dff-4248-8e76-5dc20e884765"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="436" y="22" width="117" height="29" uuid="c3f818aa-21f4-463c-ad25-fc9d3504a7f4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="431" height="78" uuid="f44c7c39-bbbd-457c-b2c8-152a3144ffa0"/>
+			</rectangle>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="99" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="8" width="90" height="21" uuid="e0f61f9b-998b-4718-ac77-e31b0a42d697"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente........:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="9" width="100" height="21" uuid="30c311e5-c1d5-432d-979f-b45b1e287461"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone......:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="98" y="9" width="181" height="20" uuid="c20a6321-123c-4516-8cdb-b209c15dec9f"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="381" y="9" width="100" height="20" uuid="cfea414b-0e78-4085-b13c-31cc7a275154"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="381" y="29" width="100" height="20" uuid="0cb51dcd-ec4a-4519-9188-bd5eb5082ea8"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="8" width="553" height="41" uuid="fed8712c-6e93-4b22-8ac9-57257979b57c"/>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="127" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

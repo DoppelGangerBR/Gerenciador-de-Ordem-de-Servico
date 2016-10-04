@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2dbacc76-fb98-457a-a647-518c8707e6d0">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     ordem_servico."id_os" AS ordem_servico_id_os,
+     ordem_servico."usuario_id" AS ordem_servico_usuario_id,
+     ordem_servico."cadastro_clientes_id" AS ordem_servico_cadastro_clientes_id,
+     ordem_servico."modelo" AS ordem_servico_modelo,
+     ordem_servico."marca" AS ordem_servico_marca,
+     ordem_servico."numero_serie" AS ordem_servico_numero_serie,
+     ordem_servico."equipamento" AS ordem_servico_equipamento,
+     ordem_servico."acessorios_obs" AS ordem_servico_acessorios_obs,
+     ordem_servico."problema_reclamado" AS ordem_servico_problema_reclamado,
+     ordem_servico."data_abertura" AS ordem_servico_data_abertura,
+     cadastro_clientes."id_cliente" AS cadastro_clientes_id_cliente,
+     cadastro_clientes."nome" AS cadastro_clientes_nome,
+     cadastro_clientes."telefone" AS cadastro_clientes_telefone,
+     cadastro_clientes."celular" AS cadastro_clientes_celular,
+     cadastro_clientes."endereco" AS cadastro_clientes_endereco,
+     cadastro_clientes."cpfcnpj" AS cadastro_clientes_cpfcnpj,
+     cadastro_clientes."bairro" AS cadastro_clientes_bairro,
+     cadastro_clientes."cidade" AS cadastro_clientes_cidade,
+     cadastro_clientes."estado" AS cadastro_clientes_estado,
+     cadastro_clientes."ativo" AS cadastro_clientes_ativo,
+     cadastro_clientes."numero" AS cadastro_clientes_numero
+FROM
+     "public"."cadastro_clientes" cadastro_clientes INNER JOIN "public"."ordem_servico" ordem_servico ON cadastro_clientes."id_cliente" = ordem_servico."cadastro_clientes_id"
+WHERE cadastro_clientes_id = id_cliente;]]>
+	</queryString>
+	<field name="ordem_servico_id_os" class="java.lang.Integer"/>
+	<field name="ordem_servico_usuario_id" class="java.lang.Integer"/>
+	<field name="ordem_servico_cadastro_clientes_id" class="java.lang.Integer"/>
+	<field name="ordem_servico_modelo" class="java.lang.String"/>
+	<field name="ordem_servico_marca" class="java.lang.String"/>
+	<field name="ordem_servico_numero_serie" class="java.lang.String"/>
+	<field name="ordem_servico_equipamento" class="java.lang.String"/>
+	<field name="ordem_servico_acessorios_obs" class="java.lang.String"/>
+	<field name="ordem_servico_problema_reclamado" class="java.lang.String"/>
+	<field name="ordem_servico_data_abertura" class="java.sql.Date"/>
+	<field name="cadastro_clientes_id_cliente" class="java.lang.Integer"/>
+	<field name="cadastro_clientes_nome" class="java.lang.String"/>
+	<field name="cadastro_clientes_telefone" class="java.lang.String"/>
+	<field name="cadastro_clientes_celular" class="java.lang.String"/>
+	<field name="cadastro_clientes_endereco" class="java.lang.String"/>
+	<field name="cadastro_clientes_cpfcnpj" class="java.lang.String"/>
+	<field name="cadastro_clientes_bairro" class="java.lang.String"/>
+	<field name="cadastro_clientes_cidade" class="java.lang.String"/>
+	<field name="cadastro_clientes_estado" class="java.lang.String"/>
+	<field name="cadastro_clientes_ativo" class="java.lang.Integer"/>
+	<field name="cadastro_clientes_numero" class="java.lang.String"/>
+	<variable name="id_os" class="java.lang.Integer" calculation="Sum"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="241" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="73" width="537" height="156" uuid="e3490043-97d0-4f7c-8df0-7e41f7f237fb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="400" height="71" uuid="5822e307-b3e3-44d4-83d5-2291a0c850c1"/>
+			</rectangle>
+			<image>
+				<reportElement x="2" y="2" width="157" height="78" uuid="62299ec2-d2b7-4416-a5cb-a73d386d5f1e"/>
+				<imageExpression><![CDATA["C:\\Users\\Alvaro\\Documents\\NetBeansProjects\\Gerenciador de ordem de servico\\src\\Modelos\\imgs\\Logomega.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="163" y="4" width="239" height="20" uuid="395ea6fa-9ac4-4493-82d5-79fd560dcfcc"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[MEGA INFORMATICA E TECNOLOGIA LTDA-ME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="20" width="205" height="20" uuid="19599517-1449-4390-9004-26b3f14f5647"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[AV. DAS FIGUEIRAS, 926 - CENTRO - SINOP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="36" width="239" height="20" uuid="b34b75ff-e44d-487b-b38d-f39bd4a37a3c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[CNPJ: 20.259.451/0001-55   Inscr.Estadual: 13.542.928-5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="51" width="130" height="17" uuid="f81b49d2-c492-4350-8b3e-55f3dcb7232f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fone: (66) 3531-6311]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="406" y="0" width="131" height="20" uuid="66df33a6-912f-4bb7-8086-026366707905"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="410" y="2" width="136" height="20" uuid="3a25e67d-a586-4206-a6e9-918fc1846df9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORDEM DE SERVIÇO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="406" y="26" width="131" height="20" uuid="7565ff1b-ddd6-4f16-8ff5-21a94f31a871"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="406" y="51" width="131" height="20" uuid="cf71e81d-0712-48a0-8d7c-1c5b97d5cebe"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="410" y="52" width="100" height="20" uuid="3f2537e3-3540-422c-83a0-a36c5fac1bde"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="452" y="53" width="100" height="20" uuid="e43be732-99a6-4899-979a-4a34cc927949"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="28" width="100" height="20" uuid="e54b5a72-98a5-47bc-9163-ee5e2e86589d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OS Nº ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="73" width="57" height="20" uuid="6c96cc49-e40e-41ef-9c0e-02d909796278"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Cliente ....:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="92" width="57" height="20" uuid="7d891967-8001-4871-b024-04efd0dd3e7e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Telefone .:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="74" width="155" height="20" uuid="a7b83c1a-4adb-4759-baa2-45de807a4a51"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cadastro_clientes_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="92" width="148" height="20" uuid="79ba3b59-02fb-499e-92c0-054fdae5e6c1"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cadastro_clientes_celular}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="111" width="57" height="20" uuid="a69c5908-847a-4db6-b077-db3fed98ea81"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Celular...:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="111" width="147" height="20" uuid="96e7fbfd-08a3-4c38-8244-0076c7d482ef"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cadastro_clientes_celular}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

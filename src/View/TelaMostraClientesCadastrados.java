@@ -387,9 +387,9 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
     private void BtnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscaClienteActionPerformed
         BuscaCliente();
     }//GEN-LAST:event_BtnBuscaClienteActionPerformed
-    private void BuscaCliente() {
+    private void BuscaCliente() { //LIKE = case sensitive | ILIKE = sem case sensitive
         ClientesDAO dm = new ClientesDAO();
-        dm.setSql("SELECT * FROM cadastro_clientes WHERE nome LIKE '%" + TxtBuscaCliente.getText() + "%' and ativo = 1");
+        dm.setSql("SELECT * FROM cadastro_clientes WHERE nome ILIKE '%" + TxtBuscaCliente.getText() + "%' and ativo = 1");
         try {
             TabelaClientes.setModel(dm.AlimentaTabelaClientes());
             AjustaTabela();
