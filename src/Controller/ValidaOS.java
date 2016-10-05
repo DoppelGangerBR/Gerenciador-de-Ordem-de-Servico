@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 public class ValidaOS {
     private String NomeCliente,EnderecoCliente,NumeroEnderecoCliente,BairroCliente,CidadeCliente,TelefoneCliente,CelularCliente,CpfCnpjCliente;
     private String EquipamentoOs,MarcaEquipOs,ModeloEquipOs,NumeroSerieOs,AcessorioObservacaoOs,ProblemaReclamadoOs;
-    private int idUsuario;
-    private int idCliente;
+    private String idUsuario;
+    private String idCliente;
     private String id_os;
 
     
@@ -41,19 +41,19 @@ public class ValidaOS {
         fechaOs.fechaOs();
     }
 
-    public int getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public int getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 

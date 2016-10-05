@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -44,6 +45,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         TabelaOs = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -109,6 +111,13 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton1.setText("Imprimir");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,7 +132,9 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(27, 27, 27)
-                                .addComponent(jButton2)))
+                                .addComponent(jButton2)
+                                .addGap(54, 54, 54)
+                                .addComponent(jToggleButton1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -137,7 +148,8 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jToggleButton1))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
@@ -168,6 +180,20 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        OrdemServicoDAO imp = new OrdemServicoDAO();
+        //TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString()
+        imp.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
+        imp.setIdCliente(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 1).toString());
+        try {
+            imp.Imprime();
+        } catch (JRException ex) {
+            Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,15 +246,18 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                 TabelaOs.getColumnModel().getColumn(0).setMinWidth(50);
                 TabelaOs.getColumnModel().getColumn(0).setPreferredWidth(50);
                 TabelaOs.getColumnModel().getColumn(0).setMaxWidth(50);
-                TabelaOs.getColumnModel().getColumn(1).setMinWidth(180);
-                TabelaOs.getColumnModel().getColumn(1).setPreferredWidth(180);
-                TabelaOs.getColumnModel().getColumn(1).setMaxWidth(180);
-                TabelaOs.getColumnModel().getColumn(2).setMinWidth(110);
-                TabelaOs.getColumnModel().getColumn(2).setPreferredWidth(110);
-                TabelaOs.getColumnModel().getColumn(2).setMaxWidth(110);
-                TabelaOs.getColumnModel().getColumn(3).setMinWidth(350);
-                TabelaOs.getColumnModel().getColumn(3).setPreferredWidth(350);
-                TabelaOs.getColumnModel().getColumn(3).setMaxWidth(350);                
+                TabelaOs.getColumnModel().getColumn(1).setMinWidth(50);
+                TabelaOs.getColumnModel().getColumn(1).setPreferredWidth(50);
+                TabelaOs.getColumnModel().getColumn(1).setMaxWidth(50);
+                TabelaOs.getColumnModel().getColumn(2).setMinWidth(180);
+                TabelaOs.getColumnModel().getColumn(2).setPreferredWidth(180);
+                TabelaOs.getColumnModel().getColumn(2).setMaxWidth(180);
+                TabelaOs.getColumnModel().getColumn(3).setMinWidth(110);
+                TabelaOs.getColumnModel().getColumn(3).setPreferredWidth(110);
+                TabelaOs.getColumnModel().getColumn(3).setMaxWidth(110);
+                TabelaOs.getColumnModel().getColumn(4).setMinWidth(350);
+                TabelaOs.getColumnModel().getColumn(4).setPreferredWidth(350);
+                TabelaOs.getColumnModel().getColumn(4).setMaxWidth(350);                
                 TabelaOs.changeSelection(0, 0, false, false);
     }
 
@@ -239,5 +268,6 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

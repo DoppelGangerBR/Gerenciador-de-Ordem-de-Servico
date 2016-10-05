@@ -427,7 +427,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         if((getId()) == null){
             JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado\nPor favor, tente novamente!");
         }else{
-            controllerOs.setIdCliente(Integer.parseInt(getId()));        
+        controllerOs.setIdCliente(getId());        
         controllerOs.setNomeCliente(TxtNomeCliente.getText());
         controllerOs.setEnderecoCliente(TxtEnderecoCliente.getText());
         controllerOs.setNumeroEnderecoCliente(TxtNumeroEndCliente.getText());
