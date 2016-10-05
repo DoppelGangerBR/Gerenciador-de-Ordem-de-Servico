@@ -610,7 +610,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
     }
 
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/User-100.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/View/imgs/User-100.png")));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BtnCancelar;

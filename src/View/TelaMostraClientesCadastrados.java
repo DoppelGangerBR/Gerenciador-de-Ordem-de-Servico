@@ -460,7 +460,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
     }
 
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/User-100.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/View/imgs/User-100.png")));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

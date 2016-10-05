@@ -638,7 +638,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         this.Cpf = Cpf;
     }
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/clipboard-icon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/View/imgs/clipboard-icon.png")));
     }
     public String getEquipamento() {
         return Equipamento;

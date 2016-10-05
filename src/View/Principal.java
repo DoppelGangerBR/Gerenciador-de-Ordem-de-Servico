@@ -231,7 +231,7 @@ public class Principal extends javax.swing.JFrame implements KeyListener{
         });
     }
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/tccIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/View/imgs/tccIcon.png")));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

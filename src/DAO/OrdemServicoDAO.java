@@ -9,15 +9,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JRDesignQuery;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.engine.design.*;
 import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.engine.*;
 
 public class OrdemServicoDAO extends EntidadeConexao {
 
@@ -146,7 +141,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
     public void Imprime() throws JRException, SQLException {
         Connection conexao = abreConexao();
         try{
-        JasperDesign jasperDesign = JRXmlLoader.load(getClass().getResourceAsStream("/Modelos/Modelo_OS.jrxml"));
+        JasperDesign jasperDesign = JRXmlLoader.load(getClass().getResourceAsStream("/Modelo_OS.jrxml"));
         String sql = "SELECT\n"
                 + "ordem_servico.\"id_os\" AS ordem_servico_id_os,\n"
                 + "ordem_servico.\"usuario_id\" AS ordem_servico_usuario_id,\n"
@@ -177,7 +172,9 @@ public class OrdemServicoDAO extends EntidadeConexao {
         jasperDesign.setQuery(newQuery);
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conexao);
-        JasperViewer.viewReport(jasperPrint);
+        
+        JasperPrintManager.printReport(jasperPrint, true);
+        //JasperViewer.viewReport(jasperPrint, false);
         conexao.close();
         }catch(Exception e){
             conexao.close();

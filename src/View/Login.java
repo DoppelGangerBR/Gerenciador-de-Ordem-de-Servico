@@ -230,7 +230,7 @@ public class Login extends javax.swing.JFrame implements KeyListener {
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/view/imgs/tccIcon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/View/imgs/tccIcon.png")));
     }
 
     
