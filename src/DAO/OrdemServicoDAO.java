@@ -17,29 +17,29 @@ import net.sf.jasperreports.engine.*;
 public class OrdemServicoDAO extends EntidadeConexao {
 
     private String NomeCliente, EnderecoCliente, NumeroEnderecoCliente, BairroCliente, CidadeCliente, TelefoneCliente, CelularCliente, CpfCnpjCliente;
-    private String EquipamentoOs, MarcaEquipOs, ModeloEquipOs, NumeroSerieOs, AcessorioObservacaoOs, ProblemaReclamadoOs;
+    private String EquipamentoOs, MarcaEquipOs, ModeloEquipOs, NumeroSerieOs, AcessorioOs, ProblemaReclamadoOs, ObsOs;
+
     private int idUsuario;
     private String idCliente;
     private String id_os;
     private String data;
     private String sql;
 
-    public void GravaOs() throws SQLException {
+    public boolean GravaOs() throws SQLException {
         DatasHoras dataAtual = new DatasHoras();
         Connection conexao = abreConexao();
         PreparedStatement prs;
         data = dataAtual.retornaData();
         String sql = "INSERT INTO ordem_servico(usuario_id,cadastro_clientes_id,data_abertura,modelo,problema_reclamado,marca,equipamento"
-                + ",numero_serie,acessorios_obs) VALUES('" + getIdUsuario() + "','" + getIdCliente() + "','" + data + "','" + getModeloEquipOs() + "','" + getProblemaReclamadoOs() + "','" + getMarcaEquipOs() + "','" + getEquipamentoOs() + "','" + getNumeroSerieOs() + "','" + getAcessorioObservacaoOs() + "')";
+                + ",numero_serie,acessorios,obsos,aberta_fechada) VALUES('" + getIdUsuario() + "','" + getIdCliente() + "','" + data + "','" + getModeloEquipOs() + "','" + getProblemaReclamadoOs() + "','" + getMarcaEquipOs() + "','" + getEquipamentoOs() + "','" + getNumeroSerieOs() + "','" + getAcessorioOs() + "','" + getObsOs() + "',1)";
         try {
             prs = conexao.prepareStatement(sql);
-            prs.executeUpdate();
-            //JOptionPane.showMessageDialog(null, "OS REGISTRADA");
+            prs.executeUpdate();            
             conexao.close();
+            return true;
         } catch (SQLException e) {
             conexao.close();
-            //JOptionPane.showMessageDialog(null, "Falha no DAO da OS");
-            JOptionPane.showConfirmDialog(null, e.getMessage());
+            return false;
         } finally {
             conexao.close();
         }
@@ -59,7 +59,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
             dm.addColumn("Cliente");
             dm.addColumn("Telefone");
             dm.addColumn("Descrição");
-            String sql = "SELECT id_os,id_cliente,nome,telefone,problema_reclamado FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente";
+            String sql = "SELECT id_os,id_cliente,nome,telefone,problema_reclamado FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente ORDER BY id_os DESC";
             prs = conexao.prepareStatement(sql);
             rset = prs.executeQuery();
             while (rset.next()) {
@@ -68,7 +68,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
                 String nome = rset.getString(3);
                 String telefone = rset.getString(4);
                 String problema_reclamado = rset.getString(5);
-                dm.addRow(new String[]{id_os,id_cliente, nome, telefone, problema_reclamado});
+                dm.addRow(new String[]{id_os, id_cliente, nome, telefone, problema_reclamado});                
             }
             rset.close();
             prs.close();
@@ -81,6 +81,8 @@ public class OrdemServicoDAO extends EntidadeConexao {
     }
     //SQL para calcular diferença de dias
     //SELECT DATE_PART('day',data_abertura::date) - DATE_PART('day',now()::date) from ordem_servico
+    //O Select abaixo é mais efetivo    
+    //SELECT data_abertura::date - now()::date,id_os,aberta_fechada from ordem_servico
 
     public void VerificaDataESetaStatus() throws SQLException {
         Connection conexao = abreConexao();
@@ -102,19 +104,20 @@ public class OrdemServicoDAO extends EntidadeConexao {
                     if (dif < -2 && dif > -6) {
                         sql = "UPDATE ordem_servico SET status_os = 2 WHERE id_os = '" + id_os + "'";
                         stmt2.executeUpdate(sql);
-                        System.err.println("O ID: " + id_os + " foi movido para status 2(3 a 6 dias de atraso)");
-                        System.err.println("Atrasado em: " + dif + " dias");
-                        System.err.println("ID " + id_os + " Alterado para status 2: " + id_os);
+                        //System.err.println("O ID: " + id_os + " foi movido para status 2(3 a 6 dias de atraso)");
+                        //System.err.println("Atrasado em: " + dif + " dias");
+                        //System.err.println("ID " + id_os + " Alterado para status 2: " + id_os);
                     }
                     if (dif <= -6 && dif > -10) {
                         sql = "UPDATE ordem_servico SET status_os = 3 WHERE id_os = '" + id_os + "'";
                         stmt2.executeUpdate(sql);
-                        System.err.println("O ID: " + id_os + " foi movido para status 3(7 ou mais dias de atraso)");
-                        System.err.println("Atrasado em: " + dif + " dias");
-                        System.err.println("ID " + id_os + " Alterado para status 3: " + id_os);
+                        //System.err.println("O ID: " + id_os + " foi movido para status 3(7 ou mais dias de atraso)");
+                        //System.err.println("Atrasado em: " + dif + " dias");
+                        //System.err.println("ID " + id_os + " Alterado para status 3: " + id_os);
                     }
+                    //System.err.println("OS: "+id_os+" esta aberta");
                 } else if (aberto_fechado == 0) {
-                    System.err.println("A O.S " + id_os + " ESTA FECHADA e não sera alterada");
+                    //System.err.println("A O.S " + id_os + " ESTA FECHADA e não sera alterada");
                 }
 
             }
@@ -140,46 +143,43 @@ public class OrdemServicoDAO extends EntidadeConexao {
 
     public void Imprime() throws JRException, SQLException {
         Connection conexao = abreConexao();
-        try{
-        JasperDesign jasperDesign = JRXmlLoader.load(getClass().getResourceAsStream("/Modelo_OS.jrxml"));
-        String sql = "SELECT\n"
-                + "ordem_servico.\"id_os\" AS ordem_servico_id_os,\n"
-                + "ordem_servico.\"usuario_id\" AS ordem_servico_usuario_id,\n"
-                + "ordem_servico.\"cadastro_clientes_id\" AS ordem_servico_cadastro_clientes_id,\n"
-                + "ordem_servico.\"modelo\" AS ordem_servico_modelo,\n"
-                + "ordem_servico.\"marca\" AS ordem_servico_marca,\n"
-                + "ordem_servico.\"numero_serie\" AS ordem_servico_numero_serie,\n"
-                + "ordem_servico.\"equipamento\" AS ordem_servico_equipamento,\n"
-                + "ordem_servico.\"acessorios_obs\" AS ordem_servico_acessorios_obs,\n"
-                + "ordem_servico.\"problema_reclamado\" AS ordem_servico_problema_reclamado,\n"
-                + "ordem_servico.\"data_abertura\" AS ordem_servico_data_abertura,\n"
-                + "cadastro_clientes.\"id_cliente\" AS cadastro_clientes_id_cliente,\n"
-                + "cadastro_clientes.\"nome\" AS cadastro_clientes_nome,\n"
-                + "cadastro_clientes.\"telefone\" AS cadastro_clientes_telefone,\n"
-                + "cadastro_clientes.\"celular\" AS cadastro_clientes_celular,\n"
-                + "cadastro_clientes.\"endereco\" AS cadastro_clientes_endereco,\n"
-                + "cadastro_clientes.\"cpfcnpj\" AS cadastro_clientes_cpfcnpj,\n"
-                + "cadastro_clientes.\"bairro\" AS cadastro_clientes_bairro,\n"
-                + "cadastro_clientes.\"cidade\" AS cadastro_clientes_cidade,\n"
-                + "cadastro_clientes.\"estado\" AS cadastro_clientes_estado,\n"
-                + "cadastro_clientes.\"ativo\" AS cadastro_clientes_ativo,\n"
-                + "cadastro_clientes.\"numero\" AS cadastro_clientes_numero\n"
-                + "FROM\n"
-                + "     \"public\".\"cadastro_clientes\" cadastro_clientes INNER JOIN \"public\".\"ordem_servico\" ordem_servico ON cadastro_clientes.\"id_cliente\" = ordem_servico.\"cadastro_clientes_id\"\n"
-                + "WHERE cadastro_clientes_id = '" + getIdCliente() + "' and id_os = '" + getId_os() + "'";
-        JRDesignQuery newQuery = new JRDesignQuery();
-        newQuery.setText(sql);
-        jasperDesign.setQuery(newQuery);
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conexao);
-        
-        JasperPrintManager.printReport(jasperPrint, true);
-        //JasperViewer.viewReport(jasperPrint, false);
-        conexao.close();
-        }catch(Exception e){
+        try {
+            JasperDesign jasperDesign = JRXmlLoader.load(getClass().getResourceAsStream("/Modelo_OS.jrxml"));
+            String sql = "SELECT * FROM ordem_servico,cadastro_clientes WHERE id_os = '"+getId_os()+"' and id_cliente ='"+getIdCliente()+"'";
+            JRDesignQuery newQuery = new JRDesignQuery();
+            newQuery.setText(sql);
+            jasperDesign.setQuery(newQuery);
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conexao);
+
+            JasperPrintManager.printReport(jasperPrint, true);
+            //JasperViewer.viewReport(jasperPrint, false);
             conexao.close();
+        } catch (Exception e) {
+            conexao.close();
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+    public int retornaID() throws SQLException{
+        Connection conexao = abreConexao();
+        int id = 0;
+        try{
+            PreparedStatement prs;
+            ResultSet rset;
+            String sql = "SELECT id_os FROM ordem_servico";
+            prs = conexao.prepareStatement(sql);        
+            rset = prs.executeQuery();
+            while(rset.next()){
+                id = rset.getInt("id_os");
+            }
+            id = id + 1;
+            conexao.close();
+            return id;
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return 0;
     }
 
     public String getNomeCliente() {
@@ -278,12 +278,12 @@ public class OrdemServicoDAO extends EntidadeConexao {
         this.NumeroSerieOs = NumeroSerieOs;
     }
 
-    public String getAcessorioObservacaoOs() {
-        return AcessorioObservacaoOs;
+    public String getAcessorioOs() {
+        return AcessorioOs;
     }
 
-    public void setAcessorioObservacaoOs(String AcessorioObservacaoOs) {
-        this.AcessorioObservacaoOs = AcessorioObservacaoOs;
+    public void setAcessorioOs(String AcessorioObservacaoOs) {
+        this.AcessorioOs = AcessorioObservacaoOs;
     }
 
     public String getProblemaReclamadoOs() {
@@ -316,6 +316,14 @@ public class OrdemServicoDAO extends EntidadeConexao {
 
     public void setId_os(String id_os) {
         this.id_os = id_os;
+    }
+
+    public String getObsOs() {
+        return ObsOs;
+    }
+
+    public void setObsOs(String ObsOs) {
+        this.ObsOs = ObsOs;
     }
 
 }

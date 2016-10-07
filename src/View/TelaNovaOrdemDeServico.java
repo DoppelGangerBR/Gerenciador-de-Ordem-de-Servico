@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ValidaOS;
+import DAO.OrdemServicoDAO;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 
 
 public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyListener{
@@ -20,6 +22,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         setIcon();
         addKeyListener(this);
         TxtProblemaReclamadoOS.addKeyListener(this);
+        TxtNomeCliente.addKeyListener(this);
         
     }
     @SuppressWarnings("unchecked")
@@ -61,11 +64,12 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtAcessorioObsOs = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TxtProblemaReclamadoOS = new javax.swing.JTextArea();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TxtObs = new javax.swing.JTextArea();
         BtnSalvar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Nova ordem de serviço");
@@ -73,6 +77,9 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -262,7 +269,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         jLabel12.setText("Nº de Serie.:");
 
         jLabel13.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel13.setText("Acessorios/observações.:");
+        jLabel13.setText("Acessorios:");
 
         jLabel14.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 102, 153));
@@ -280,8 +287,18 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
 
         TxtProblemaReclamadoOS.setColumns(20);
         TxtProblemaReclamadoOS.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        TxtProblemaReclamadoOS.setLineWrap(true);
         TxtProblemaReclamadoOS.setRows(5);
         jScrollPane1.setViewportView(TxtProblemaReclamadoOS);
+
+        jLabel16.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel16.setText("Observações:");
+
+        TxtObs.setColumns(20);
+        TxtObs.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        TxtObs.setLineWrap(true);
+        TxtObs.setRows(5);
+        jScrollPane2.setViewportView(TxtObs);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -291,28 +308,26 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(TxtAcessorioObsOs, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtModelEquipOs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtEquipOs))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(TxtAcessorioObsOs, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtModelEquipOs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtEquipOs))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel12)
-                                            .addComponent(TxtMarcaEquipOs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel10))
-                                    .addComponent(TxtNumSerieEquipOs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1))
-                        .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(TxtMarcaEquipOs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel10))
+                            .addComponent(TxtNumSerieEquipOs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel16)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,8 +354,12 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         BtnSalvar.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
@@ -369,14 +388,14 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,19 +403,13 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnSalvar)
                     .addComponent(BtnCancelar))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap())
         );
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -420,14 +433,21 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     }//GEN-LAST:event_formWindowClosing
 
     private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
-        SalvaOs();       
+        try {
+            SalvaOs();
+        } catch (JRException ex) {
+            Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnSalvarActionPerformed
-    private void SalvaOs(){
+    private void SalvaOs() throws JRException{
+        boolean status = false;
         ValidaOS controllerOs = new ValidaOS();
         if((getId()) == null){
             JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado\nPor favor, tente novamente!");
         }else{
-        controllerOs.setIdCliente(getId());        
+        
+        controllerOs.setIdCliente(getId()); 
+        controllerOs.setId_os(LabelNumeroOs.getText());
         controllerOs.setNomeCliente(TxtNomeCliente.getText());
         controllerOs.setEnderecoCliente(TxtEnderecoCliente.getText());
         controllerOs.setNumeroEnderecoCliente(TxtNumeroEndCliente.getText());
@@ -440,13 +460,17 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         controllerOs.setMarcaEquipOs(TxtMarcaEquipOs.getText());
         controllerOs.setModeloEquipOs(TxtModelEquipOs.getText());
         controllerOs.setNumeroSerieOs(TxtNumSerieEquipOs.getText());
-        controllerOs.setAcessorioObservacaoOs(TxtAcessorioObsOs.getText());
+        controllerOs.setAcessorioOs(TxtAcessorioObsOs.getText());
         controllerOs.setProblemaReclamadoOs(TxtProblemaReclamadoOS.getText());
+        controllerOs.setObsOs(TxtObs.getText());
             try {
-                controllerOs.VerificaCamposObrigatorios();
+                status = controllerOs.VerificaCamposObrigatorios();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if(status == true){
+            dispose();
         }
     }
     private void BtnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscaClienteActionPerformed
@@ -468,6 +492,15 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
         ConfirmaSaida();
     }//GEN-LAST:event_BtnCancelarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        OrdemServicoDAO retornaId = new OrdemServicoDAO();
+        try {
+            LabelNumeroOs.setText(Integer.toString(retornaId.retornaID()));
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
     public void preencheCampos(){
         TxtTelefone.setText(getTelefone());
         TxtNomeCliente.setText(getNome());        
@@ -712,6 +745,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     private javax.swing.JTextField TxtNomeCliente;
     private javax.swing.JTextField TxtNumSerieEquipOs;
     private javax.swing.JTextField TxtNumeroEndCliente;
+    private javax.swing.JTextArea TxtObs;
     private javax.swing.JTextArea TxtProblemaReclamadoOS;
     private javax.swing.JFormattedTextField TxtTelefone;
     private javax.swing.JLabel jLabel1;
@@ -721,6 +755,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -729,13 +764,12 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -746,7 +780,11 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
-            SalvaOs();
+            try {
+                SalvaOs();
+            } catch (JRException ex) {
+                Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
             ConfirmaSaida();

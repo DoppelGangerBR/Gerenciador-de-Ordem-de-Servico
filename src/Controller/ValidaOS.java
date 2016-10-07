@@ -4,10 +4,11 @@ package Controller;
 import DAO.OrdemServicoDAO;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 
 public class ValidaOS {
     private String NomeCliente,EnderecoCliente,NumeroEnderecoCliente,BairroCliente,CidadeCliente,TelefoneCliente,CelularCliente,CpfCnpjCliente;
-    private String EquipamentoOs,MarcaEquipOs,ModeloEquipOs,NumeroSerieOs,AcessorioObservacaoOs,ProblemaReclamadoOs;
+    private String EquipamentoOs,MarcaEquipOs,ModeloEquipOs,NumeroSerieOs,AcessorioOs,ProblemaReclamadoOs,ObsOs;
     private String idUsuario;
     private String idCliente;
     private String id_os;
@@ -18,22 +19,36 @@ public class ValidaOS {
     public ValidaOS() {
         
     }
-    public void VerificaCamposObrigatorios() throws SQLException{
+    public boolean VerificaCamposObrigatorios() throws SQLException, JRException{
         if(getNomeCliente().equals("") || getTelefoneCliente().equals("") || getCelularCliente().equals("") || getCpfCnpjCliente().equals("")){
             JOptionPane.showMessageDialog(null, "Erro, preencha todos os campos");
         }else{
             EnviaOSproBanco.setIdCliente(getIdCliente());
             EnviaOSproBanco.setIdCliente(getIdCliente());
-            EnviaOSproBanco.setAcessorioObservacaoOs(getAcessorioObservacaoOs());
+            EnviaOSproBanco.setAcessorioOs(getAcessorioOs());
             EnviaOSproBanco.setEquipamentoOs(getEquipamentoOs());
             EnviaOSproBanco.setProblemaReclamadoOs(getProblemaReclamadoOs());
             EnviaOSproBanco.setNumeroSerieOs(getNumeroSerieOs());
             EnviaOSproBanco.setModeloEquipOs(getModeloEquipOs());
             EnviaOSproBanco.setMarcaEquipOs(getMarcaEquipOs());
-            EnviaOSproBanco.GravaOs();
-            JOptionPane.showMessageDialog(null, "OK, passou pelo Controller");
+            EnviaOSproBanco.setObsOs(getObsOs());
+            EnviaOSproBanco.setId_os(getId_os());
+            boolean status = EnviaOSproBanco.GravaOs();
+            if(status == true){
+                JOptionPane.showMessageDialog(null, "OS Gravada com sucesso");
+                int resposta = JOptionPane.showConfirmDialog(null, "Deseja imprimir a OS?","Imprimir?",JOptionPane.YES_NO_OPTION);
+                if(resposta == JOptionPane.YES_OPTION){
+                    EnviaOSproBanco.Imprime();
+                    return true;
+                }                              
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Falha na ");
+                return false;
+            }
+            
         }
-        
+        return true;
     }
     public void fechaOs() throws SQLException{
         OrdemServicoDAO fechaOs = new OrdemServicoDAO();
@@ -171,12 +186,12 @@ public class ValidaOS {
         this.NumeroSerieOs = NumeroSerieOs;
     }
 
-    public String getAcessorioObservacaoOs() {
-        return AcessorioObservacaoOs;
+    public String getAcessorioOs() {
+        return AcessorioOs;
     }
 
-    public void setAcessorioObservacaoOs(String AcessorioObservacaoOs) {
-        this.AcessorioObservacaoOs = AcessorioObservacaoOs;
+    public void setAcessorioOs(String AcessorioObservacaoOs) {
+        this.AcessorioOs = AcessorioObservacaoOs;
     }
 
     public String getProblemaReclamadoOs() {
@@ -192,6 +207,14 @@ public class ValidaOS {
 
     public void setId_os(String id_os) {
         this.id_os = id_os;
+    }
+
+    public String getObsOs() {
+        return ObsOs;
+    }
+
+    public void setObsOs(String ObsOs) {
+        this.ObsOs = ObsOs;
     }
     
 }
