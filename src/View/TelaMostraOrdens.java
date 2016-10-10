@@ -7,10 +7,13 @@ package View;
 
 import Controller.ValidaOS;
 import DAO.OrdemServicoDAO;
+import java.awt.Component;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JRException;
@@ -26,6 +29,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
      */
     public TelaMostraOrdens() throws SQLException {
         initComponents();
+        AtualizaTabelaOs();
         AjustaTabela();
         
     }
@@ -45,7 +49,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         TabelaOs = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        BtnImprimir = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -112,10 +116,12 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("Imprimir");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnImprimir.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Print_48px.png"))); // NOI18N
+        BtnImprimir.setText("Imprimir");
+        BtnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                BtnImprimirActionPerformed(evt);
             }
         });
 
@@ -134,8 +140,8 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addGap(27, 27, 27)
                                 .addComponent(jButton2)
-                                .addGap(54, 54, 54)
-                                .addComponent(jToggleButton1)))
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -150,7 +156,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jToggleButton1))
+                    .addComponent(BtnImprimir))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
@@ -183,7 +189,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void BtnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnImprimirActionPerformed
         OrdemServicoDAO imp = new OrdemServicoDAO();
         //TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString()
         imp.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
@@ -195,7 +201,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_BtnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,11 +245,9 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
     public void AtualizaTabelaOs()throws SQLException{
         DefaultTableModel dm = new OrdemServicoDAO().AlimentaTabelaOs();
         TabelaOs.setModel(dm);        
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(TabelaOs.getModel());
-        TabelaOs.setRowSorter(sorter);       
     }
     private void AjustaTabela() throws SQLException{
-                AtualizaTabelaOs();
+                
                 TabelaOs.changeSelection(0, 0, false, false);
                 TabelaOs.getColumnModel().getColumn(0).setMinWidth(50);
                 TabelaOs.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -262,14 +266,15 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                 TabelaOs.getColumnModel().getColumn(4).setMaxWidth(350);                
                 TabelaOs.changeSelection(0, 0, false, false);
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton BtnImprimir;
     private javax.swing.JTable TabelaOs;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

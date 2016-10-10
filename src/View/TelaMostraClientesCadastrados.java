@@ -26,7 +26,6 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
     boolean status = false;
 
     public TelaMostraClientesCadastrados() throws SQLException {
-
         initComponents();
         AtualizaTabelaClientes();
         setIcon();
@@ -326,8 +325,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
         this.status = status;
     }
 
-    private void AjustaTabela() throws SQLException {
-        
+    private void AjustaTabela() throws SQLException {        
         //As linhas abaixo servem para definir um tamanho padrão das colunas na tabela
         TabelaClientes.changeSelection(0, 0, false, false);
         TabelaClientes.getColumnModel().getColumn(0).setMinWidth(50);
@@ -389,7 +387,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
     }//GEN-LAST:event_BtnBuscaClienteActionPerformed
     private void BuscaCliente() { //LIKE = case sensitive | ILIKE = sem case sensitive
         ClientesDAO dm = new ClientesDAO();
-        dm.setSql("SELECT * FROM cadastro_clientes WHERE nome ILIKE '%" + TxtBuscaCliente.getText() + "%' and ativo = 1");
+        dm.setSql("SELECT * FROM cadastro_clientes WHERE nome ILIKE '%" + TxtBuscaCliente.getText() + "%' and ativo = 1 ORDER BY id_cliente DESC");
         try {
             TabelaClientes.setModel(dm.AlimentaTabelaClientes());
             AjustaTabela();
@@ -400,7 +398,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
 
     public void AtualizaTabelaClientes() throws SQLException {
         ClientesDAO dm = new ClientesDAO();
-        dm.setSql("SELECT * FROM cadastro_clientes WHERE ativo = 1");
+        dm.setSql("SELECT * FROM cadastro_clientes WHERE ativo = 1 ORDER BY id_cliente DESC");
         TabelaClientes.setModel(dm.AlimentaTabelaClientes());
     }
 
