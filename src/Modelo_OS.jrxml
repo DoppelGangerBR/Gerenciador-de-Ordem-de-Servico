@@ -281,7 +281,7 @@
 				<text><![CDATA[Nº Serie..:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="330" y="4" width="64" height="20" uuid="22e7fe8a-6b4f-4297-8aa6-9459543ff892"/>
+				<reportElement x="328" y="4" width="64" height="20" uuid="22e7fe8a-6b4f-4297-8aa6-9459543ff892"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -309,7 +309,7 @@
 				<text><![CDATA[Problema.:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="58" y="43" width="467" height="54" uuid="1a2831bd-9642-4794-9428-ccf8f420e792"/>
+				<reportElement x="59" y="43" width="467" height="54" uuid="1a2831bd-9642-4794-9428-ccf8f420e792"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>

@@ -22,8 +22,7 @@ public class ValidaOS {
     public boolean VerificaCamposObrigatorios() throws SQLException, JRException{
         if(getNomeCliente().equals("") || getTelefoneCliente().equals("") || getCelularCliente().equals("") || getCpfCnpjCliente().equals("")){
             JOptionPane.showMessageDialog(null, "Erro, preencha todos os campos");
-        }else{
-            EnviaOSproBanco.setIdCliente(getIdCliente());
+        }else{            
             EnviaOSproBanco.setIdCliente(getIdCliente());
             EnviaOSproBanco.setAcessorioOs(getAcessorioOs());
             EnviaOSproBanco.setEquipamentoOs(getEquipamentoOs());
@@ -38,12 +37,14 @@ public class ValidaOS {
                 JOptionPane.showMessageDialog(null, "OS Gravada com sucesso");
                 int resposta = JOptionPane.showConfirmDialog(null, "Deseja imprimir a OS?","Imprimir?",JOptionPane.YES_NO_OPTION);
                 if(resposta == JOptionPane.YES_OPTION){
+                    EnviaOSproBanco.setId_os(getId_os());
+                    EnviaOSproBanco.setIdCliente(getIdCliente());
                     EnviaOSproBanco.Imprime();
                     return true;
                 }                              
                 return true;
             }else{
-                JOptionPane.showMessageDialog(null, "Falha na ");
+                JOptionPane.showMessageDialog(null, "Falha na criação da O.S tente novamente");
                 return false;
             }
             
@@ -54,6 +55,15 @@ public class ValidaOS {
         OrdemServicoDAO fechaOs = new OrdemServicoDAO();
         fechaOs.setId_os(getId_os());
         fechaOs.fechaOs();
+    }
+    public String[] visualizaOs() throws SQLException{
+        OrdemServicoDAO buscaDadosOs = new OrdemServicoDAO();
+        String dadosOs[] = new String[18];
+        buscaDadosOs.setId_os(getId_os());
+        buscaDadosOs.setIdCliente(getIdCliente());
+        buscaDadosOs.visualizaOs();
+        dadosOs = buscaDadosOs.visualizaOs();        
+        return dadosOs;
     }
 
     public String getIdUsuario() {

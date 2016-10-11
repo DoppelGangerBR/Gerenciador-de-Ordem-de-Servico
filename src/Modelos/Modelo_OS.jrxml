@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Modelo_OS" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2dbacc76-fb98-457a-a647-518c8707e6d0">
 	<property name="ireport.zoom" value="1.366026910730147"/>
-	<property name="ireport.x" value="65"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="54"/>
 	<queryString>
 		<![CDATA[SELECT * FROM ordem_servico,cadastro_clientes]]>
@@ -114,14 +114,14 @@
 			<staticText>
 				<reportElement x="2" y="73" width="57" height="20" uuid="6c96cc49-e40e-41ef-9c0e-02d909796278"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cliente ....:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="387" y="74" width="57" height="20" uuid="7d891967-8001-4871-b024-04efd0dd3e7e"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Telefone ..:]]></text>
 			</staticText>
@@ -142,7 +142,7 @@
 			<staticText>
 				<reportElement x="387" y="92" width="57" height="20" uuid="a69c5908-847a-4db6-b077-db3fed98ea81"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Celular.....:]]></text>
 			</staticText>
@@ -163,14 +163,14 @@
 			<staticText>
 				<reportElement x="2" y="91" width="58" height="20" uuid="82fc1eca-4552-4955-9662-90431cf51260"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Endereço..:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2" y="109" width="58" height="20" uuid="ce9df7dd-aad9-47fe-b7e0-4bb4e62352dc"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Municipio.:.]]></text>
 			</staticText>
@@ -191,7 +191,7 @@
 			<staticText>
 				<reportElement x="2" y="127" width="58" height="20" uuid="5e78a672-12ab-4296-8f96-8057429f23c9"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CPF/CNPJ:]]></text>
 			</staticText>
@@ -205,7 +205,7 @@
 			<staticText>
 				<reportElement x="387" y="110" width="57" height="20" uuid="50447904-fb36-41da-8d6f-47c6ac13e6bc"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Bairro.......:]]></text>
 			</staticText>
@@ -216,7 +216,7 @@
 			<staticText>
 				<reportElement x="387" y="128" width="57" height="20" uuid="9134829a-8ba8-445e-ae1a-dc932b17638d"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[UF............:]]></text>
 			</staticText>

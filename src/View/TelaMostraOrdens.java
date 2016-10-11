@@ -7,22 +7,18 @@ package View;
 
 import Controller.ValidaOS;
 import DAO.OrdemServicoDAO;
-import java.awt.Component;
-import javax.swing.table.DefaultTableModel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JRException;
 
 /**
  *
  * @author Alvaro
  */
-public class TelaMostraOrdens extends javax.swing.JFrame {
+public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener {
 
     /**
      * Creates new form TelaVisualizaOs
@@ -31,6 +27,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         initComponents();
         AtualizaTabelaOs();
         AjustaTabela();
+        TxtBuscaOs.addKeyListener(this);
         
     }
 
@@ -47,9 +44,11 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaOs = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnFinalizaOs = new javax.swing.JButton();
+        BtnVisualizaOs = new javax.swing.JButton();
         BtnImprimir = new javax.swing.JToggleButton();
+        jLabel2 = new javax.swing.JLabel();
+        TxtBuscaOs = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -98,21 +97,21 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         TabelaOs.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TabelaOs);
 
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Checkmark Filled-50.png"))); // NOI18N
-        jButton1.setText("Finalizar O.S");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnFinalizaOs.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnFinalizaOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Checkmark Filled-50.png"))); // NOI18N
+        BtnFinalizaOs.setText("Finalizar O.S");
+        BtnFinalizaOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnFinalizaOsActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Search-48 (1).png"))); // NOI18N
-        jButton2.setText("Visualizar O.S");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnVisualizaOs.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        BtnVisualizaOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imgs/Search-48 (1).png"))); // NOI18N
+        BtnVisualizaOs.setText("Visualizar O.S");
+        BtnVisualizaOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnVisualizaOsActionPerformed(evt);
             }
         });
 
@@ -124,6 +123,11 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                 BtnImprimirActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel2.setText("Buscar O.S.:");
+
+        TxtBuscaOs.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,11 +141,15 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(BtnFinalizaOs)
                                 .addGap(27, 27, 27)
-                                .addComponent(jButton2)
+                                .addComponent(BtnVisualizaOs)
                                 .addGap(18, 18, 18)
-                                .addComponent(BtnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(BtnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtBuscaOs, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -150,14 +158,18 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(jLabel2)
+                    .addComponent(TxtBuscaOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnFinalizaOs)
+                    .addComponent(BtnVisualizaOs)
                     .addComponent(BtnImprimir))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,7 +187,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnFinalizaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFinalizaOsActionPerformed
         ValidaOS validaFechamentoOs = new ValidaOS();
         validaFechamentoOs.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
         try {
@@ -183,11 +195,42 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnFinalizaOsActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BtnVisualizaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVisualizaOsActionPerformed
+        ValidaOS retornaVisualizacao = new ValidaOS();
+        TelaNovaOrdemDeServico abreVisualizacao = new TelaNovaOrdemDeServico();
+        retornaVisualizacao.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
+        retornaVisualizacao.setIdCliente(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 1).toString());
+        String dadosOs[] = new String[18];
+        abreVisualizacao.setId_os(Integer.parseInt(dadosOs[0]));
+        abreVisualizacao.setNome(dadosOs[1]);
+        abreVisualizacao.setBairro(dadosOs[6]);
+        abreVisualizacao.setCelular(dadosOs[3]);
+        abreVisualizacao.setCidade(dadosOs[7]);
+        abreVisualizacao.setCpf(dadosOs[5]);
+        abreVisualizacao.setAcessorio(dadosOs[13]);
+        abreVisualizacao.setEndereco(dadosOs[4]);
+        abreVisualizacao.setEquipamento(dadosOs[18]);
+        abreVisualizacao.setMarca(dadosOs[11]);
+        abreVisualizacao.setModelo(dadosOs[10]);
+        abreVisualizacao.setNumSerie(dadosOs[12]);
+        abreVisualizacao.setNumero(dadosOs[9]);
+        abreVisualizacao.setTelefone(dadosOs[2]);
+        abreVisualizacao.setObsos(dadosOs[15]);
+        abreVisualizacao.setEstado(dadosOs[8]);
+        abreVisualizacao.setProblemaReclamado(dadosOs[14]);
+        abreVisualizacao.setEquipamento(dadosOs[18]);
+        abreVisualizacao.PreencheCampos();
+        abreVisualizacao.TravaCampos();
+        abreVisualizacao.setVisible(true);        
+        try {
+            dadosOs = retornaVisualizacao.visualizaOs();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_BtnVisualizaOsActionPerformed
 
     private void BtnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnImprimirActionPerformed
         OrdemServicoDAO imp = new OrdemServicoDAO();
@@ -202,7 +245,16 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
             Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnImprimirActionPerformed
-
+    private void BuscaOs(){
+        OrdemServicoDAO dm = new OrdemServicoDAO();
+        dm.setSql("SELECT id_os,id_cliente,nome,telefone,problema_reclamado,aberta_fechada,status_os FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente AND nome ILIKE '%"+ TxtBuscaOs.getText()+"%' ORDER BY id_os DESC");
+        try{
+            TabelaOs.setModel(dm.AlimentaTabelaOs());
+            AjustaTabela();
+        }catch(SQLException e){
+            e.getMessage();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -243,11 +295,11 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
         });
     }
     public void AtualizaTabelaOs()throws SQLException{
-        DefaultTableModel dm = new OrdemServicoDAO().AlimentaTabelaOs();
-        TabelaOs.setModel(dm);        
+        OrdemServicoDAO dm = new OrdemServicoDAO();
+        dm.setSql("SELECT id_os,id_cliente,nome,telefone,problema_reclamado,aberta_fechada,status_os FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente ORDER BY id_os DESC");
+        TabelaOs.setModel(dm.AlimentaTabelaOs());        
     }
-    private void AjustaTabela() throws SQLException{
-                
+    private void AjustaTabela() throws SQLException{                
                 TabelaOs.changeSelection(0, 0, false, false);
                 TabelaOs.getColumnModel().getColumn(0).setMinWidth(50);
                 TabelaOs.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -261,20 +313,40 @@ public class TelaMostraOrdens extends javax.swing.JFrame {
                 TabelaOs.getColumnModel().getColumn(3).setMinWidth(110);
                 TabelaOs.getColumnModel().getColumn(3).setPreferredWidth(110);
                 TabelaOs.getColumnModel().getColumn(3).setMaxWidth(110);
-                TabelaOs.getColumnModel().getColumn(4).setMinWidth(350);
-                TabelaOs.getColumnModel().getColumn(4).setPreferredWidth(350);
-                TabelaOs.getColumnModel().getColumn(4).setMaxWidth(350);                
+                TabelaOs.getColumnModel().getColumn(4).setMinWidth(200);
+                TabelaOs.getColumnModel().getColumn(4).setPreferredWidth(200);
+                TabelaOs.getColumnModel().getColumn(4).setMaxWidth(200);
+                TabelaOs.getColumnModel().getColumn(5).setMinWidth(150);
+                TabelaOs.getColumnModel().getColumn(5).setPreferredWidth(150);
+                TabelaOs.getColumnModel().getColumn(5).setMaxWidth(150); 
                 TabelaOs.changeSelection(0, 0, false, false);
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnFinalizaOs;
     private javax.swing.JToggleButton BtnImprimir;
+    private javax.swing.JButton BtnVisualizaOs;
     private javax.swing.JTable TabelaOs;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField TxtBuscaOs;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        BuscaOs();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+    }
 }

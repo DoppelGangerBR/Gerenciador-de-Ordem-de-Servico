@@ -14,8 +14,9 @@ import net.sf.jasperreports.engine.JRException;
 
 public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyListener{
     String[] dadosOs = new String[9];
-    private String Nome,Endereco,Bairro,Cidade,Numero,Telefone,Celular,Cpf,id;
-    private String Equipamento,Marca,Modelo,Acessorio,NumSerie,ProblemaReclamado ;
+    private String Nome,Endereco,Bairro,Cidade,Numero,Telefone,Celular,Cpf,id,estado;    
+    private String Equipamento,Marca,Modelo,Acessorio,NumSerie,ProblemaReclamado,obsos;
+    private String aberta_fechada, statusOs;    
     private int id_os;   
     public TelaNovaOrdemDeServico() {
         initComponents();
@@ -132,7 +133,6 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         jLabel8.setText("Nº OS:");
 
         LabelNumeroOs.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        LabelNumeroOs.setText("20");
 
         jLabel15.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel15.setText("Nº");
@@ -444,8 +444,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         ValidaOS controllerOs = new ValidaOS();
         if((getId()) == null){
             JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado\nPor favor, tente novamente!");
-        }else{
-        
+        }else{        
         controllerOs.setIdCliente(getId()); 
         controllerOs.setId_os(LabelNumeroOs.getText());
         controllerOs.setNomeCliente(TxtNomeCliente.getText());
@@ -496,6 +495,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         OrdemServicoDAO retornaId = new OrdemServicoDAO();
         try {
+            JOptionPane.showMessageDialog(null, retornaId.retornaID());
             LabelNumeroOs.setText(Integer.toString(retornaId.retornaID()));
         } catch (SQLException ex) {
             Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
@@ -510,6 +510,9 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtBairroCliente.setText(getBairro());
         TxtNumeroEndCliente.setText(getNumero());
         TxtCidadeCliente.setText(getCidade());
+    }
+    public void VisualizaOs(){        
+        PreencheCampos();        
     }
     
     public void PreencheCampos(){
@@ -528,7 +531,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtNumSerieEquipOs.setText(getNumSerie());
         TxtNumeroEndCliente.setText(getNumero());
         TxtProblemaReclamadoOS.setText(getProblemaReclamado());
-        TxtTelefone.setText(getTelefone());        
+        TxtTelefone.setText(getTelefone());
     }
     public void TravaCampos(){
         TxtNomeCliente.setEditable(false);
@@ -556,7 +559,6 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtBairroCliente.setText("");
         TxtNumeroEndCliente.setText("");
         TxtCidadeCliente.setText("");
-        
     }
     
     public static void main(String args[]) {
@@ -727,7 +729,35 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     public void setId_os(int id_os) {
         this.id_os = id_os;
     }
+    public String getObsos() {
+        return obsos;
+    }
 
+    public void setObsos(String obsos) {
+        this.obsos = obsos;
+    }
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public String getAberta_fechada() {
+        return aberta_fechada;
+    }
+
+    public void setAberta_fechada(String aberta_fechada) {
+        this.aberta_fechada = aberta_fechada;
+    }
+
+    public String getStatusOs() {
+        return statusOs;
+    }
+
+    public void setStatusOs(String statusOs) {
+        this.statusOs = statusOs;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscaCliente;
     private javax.swing.JButton BtnCancelar;
