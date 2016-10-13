@@ -2,6 +2,7 @@ package View;
 
 import Controller.ValidaOS;
 import DAO.OrdemServicoDAO;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,21 +12,23 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 
+public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyListener {
 
-public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyListener{
     String[] dadosOs = new String[9];
-    private String Nome,Endereco,Bairro,Cidade,Numero,Telefone,Celular,Cpf,id,estado;    
-    private String Equipamento,Marca,Modelo,Acessorio,NumSerie,ProblemaReclamado,obsos;
-    private String aberta_fechada, statusOs;    
-    private int id_os;   
+    private String Nome, Endereco, Bairro, Cidade, Numero, Telefone, Celular, Cpf, id, estado;
+    private String Equipamento, Marca, Modelo, Acessorio, NumSerie, ProblemaReclamado, obsos;
+    private String aberta_fechada, statusOs;
+    private int id_os;
+
     public TelaNovaOrdemDeServico() {
         initComponents();
         setIcon();
         addKeyListener(this);
         TxtProblemaReclamadoOS.addKeyListener(this);
         TxtNomeCliente.addKeyListener(this);
-        
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -68,6 +71,8 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         jLabel16 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TxtObs = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        LabelStatus = new javax.swing.JLabel();
         BtnSalvar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -300,6 +305,11 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtObs.setRows(5);
         jScrollPane2.setViewportView(TxtObs);
 
+        jLabel17.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel17.setText("STATUS:");
+
+        LabelStatus.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -315,14 +325,23 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TxtModelEquipOs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtEquipOs))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(TxtMarcaEquipOs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel10))
-                            .addComponent(TxtNumSerieEquipOs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel12)
+                                            .addComponent(TxtMarcaEquipOs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel10))
+                                    .addComponent(TxtNumSerieEquipOs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(LabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
                     .addComponent(jLabel14)
                     .addComponent(jLabel16)
@@ -348,9 +367,13 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                     .addComponent(TxtModelEquipOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtNumSerieEquipOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtAcessorioObsOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtAcessorioObsOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -439,36 +462,36 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
             Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnSalvarActionPerformed
-    private void SalvaOs() throws JRException{
+    private void SalvaOs() throws JRException {
         boolean status = false;
         ValidaOS controllerOs = new ValidaOS();
-        if((getId()) == null){
+        if ((getId()) == null) {
             JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado\nPor favor, tente novamente!");
-        }else{        
-        controllerOs.setIdCliente(getId()); 
-        controllerOs.setId_os(LabelNumeroOs.getText());
-        controllerOs.setNomeCliente(TxtNomeCliente.getText());
-        controllerOs.setEnderecoCliente(TxtEnderecoCliente.getText());
-        controllerOs.setNumeroEnderecoCliente(TxtNumeroEndCliente.getText());
-        controllerOs.setTelefoneCliente(TxtTelefone.getText());        
-        controllerOs.setCelularCliente(TxtCelularCliente.getText());
-        controllerOs.setBairroCliente(TxtBairroCliente.getText());
-        controllerOs.setCpfCnpjCliente(TxtCelularCliente.getText());
-        controllerOs.setCidadeCliente(TxtCidadeCliente.getText());
-        controllerOs.setEquipamentoOs(TxtEquipOs.getText());
-        controllerOs.setMarcaEquipOs(TxtMarcaEquipOs.getText());
-        controllerOs.setModeloEquipOs(TxtModelEquipOs.getText());
-        controllerOs.setNumeroSerieOs(TxtNumSerieEquipOs.getText());
-        controllerOs.setAcessorioOs(TxtAcessorioObsOs.getText());
-        controllerOs.setProblemaReclamadoOs(TxtProblemaReclamadoOS.getText());
-        controllerOs.setObsOs(TxtObs.getText());
+        } else {
+            controllerOs.setIdCliente(getId());
+            controllerOs.setId_os(LabelNumeroOs.getText());
+            controllerOs.setNomeCliente(TxtNomeCliente.getText());
+            controllerOs.setEnderecoCliente(TxtEnderecoCliente.getText());
+            controllerOs.setNumeroEnderecoCliente(TxtNumeroEndCliente.getText());
+            controllerOs.setTelefoneCliente(TxtTelefone.getText());
+            controllerOs.setCelularCliente(TxtCelularCliente.getText());
+            controllerOs.setBairroCliente(TxtBairroCliente.getText());
+            controllerOs.setCpfCnpjCliente(TxtCelularCliente.getText());
+            controllerOs.setCidadeCliente(TxtCidadeCliente.getText());
+            controllerOs.setEquipamentoOs(TxtEquipOs.getText());
+            controllerOs.setMarcaEquipOs(TxtMarcaEquipOs.getText());
+            controllerOs.setModeloEquipOs(TxtModelEquipOs.getText());
+            controllerOs.setNumeroSerieOs(TxtNumSerieEquipOs.getText());
+            controllerOs.setAcessorioOs(TxtAcessorioObsOs.getText());
+            controllerOs.setProblemaReclamadoOs(TxtProblemaReclamadoOS.getText());
+            controllerOs.setObsOs(TxtObs.getText());
             try {
                 status = controllerOs.VerificaCamposObrigatorios();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(status == true){
+        if (status == true) {
             dispose();
         }
     }
@@ -477,14 +500,14 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
             TelaMostraClientesCadastrados selecionaCliente = new TelaMostraClientesCadastrados();
             selecionaCliente.setStatus(true);
             selecionaCliente.setVisible(true);
-            dispose();            
+            dispose();
         } catch (SQLException ex) {
             Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnBuscaClienteActionPerformed
-    private void ConfirmaSaida(){
+    private void ConfirmaSaida() {
         int x = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar a abertura da OS?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        if(x == JOptionPane.YES_OPTION){
+        if (x == JOptionPane.YES_OPTION) {
             dispose();
         }
     }
@@ -494,29 +517,36 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         OrdemServicoDAO retornaId = new OrdemServicoDAO();
-        try {
-            JOptionPane.showMessageDialog(null, retornaId.retornaID());
-            LabelNumeroOs.setText(Integer.toString(retornaId.retornaID()));
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+        if (LabelNumeroOs.getText().equals("")) {
+            try {
+
+                LabelNumeroOs.setText(Integer.toString(retornaId.retornaID()));
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            LabelNumeroOs.setText(String.valueOf(getId_os()));
         }
+
     }//GEN-LAST:event_formWindowOpened
-    public void preencheCampos(){
+    public void preencheCamposBuscaCliente() {
         TxtTelefone.setText(getTelefone());
-        TxtNomeCliente.setText(getNome());        
+        TxtNomeCliente.setText(getNome());
         TxtCelularCliente.setText(getCelular());
-        TxtCpfCnpj.setText(getCpf());  
+        TxtCpfCnpj.setText(getCpf());
         TxtEnderecoCliente.setText(getEndereco());
         TxtBairroCliente.setText(getBairro());
         TxtNumeroEndCliente.setText(getNumero());
         TxtCidadeCliente.setText(getCidade());
     }
-    public void VisualizaOs(){        
-        PreencheCampos();        
+
+    public void VisualizaOs() {
+        PreencheCamposVisualizacaoOs();
     }
-    
-    public void PreencheCampos(){
+
+    private void PreencheCamposVisualizacaoOs() {
         TravaCampos();
+        setaStatus();
         LabelNumeroOs.setText(Integer.toString(getId_os()));
         TxtNomeCliente.setText(getNome());
         TxtAcessorioObsOs.setText(getAcessorio());
@@ -532,8 +562,26 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtNumeroEndCliente.setText(getNumero());
         TxtProblemaReclamadoOS.setText(getProblemaReclamado());
         TxtTelefone.setText(getTelefone());
+        TxtObs.setText(getObsos());
+        BtnCancelar.setText("Fechar");
     }
-    public void TravaCampos(){
+    private void setaStatus(){
+        if(getStatusOs().equals("OK")){
+            LabelStatus.setText("OK");
+            LabelStatus.setBackground(Color.green);
+        }if(getStatusOs().equals("Em atraso 3-7 dias")){
+            LabelStatus.setText("Em atraso 3-7 dias");
+            LabelStatus.setBackground(Color.yellow);
+        }if(getStatusOs().equals("Em atraso +7 dias")){
+            LabelStatus.setText("Em atraso +7 dias");
+            LabelStatus.setBackground(Color.red);
+        }if(getStatusOs().equals("FECHADA")){
+            LabelStatus.setText("FECHADA");
+            LabelStatus.setBackground(Color.blue);
+        }
+    }
+
+    private void TravaCampos() {
         TxtNomeCliente.setEditable(false);
         TxtAcessorioObsOs.setEditable(false);
         TxtBairroCliente.setEditable(false);
@@ -548,8 +596,12 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtNumeroEndCliente.setEditable(false);
         TxtProblemaReclamadoOS.setEditable(false);
         TxtTelefone.setEditable(false);
+        TxtObs.setEditable(false);
+        BtnBuscaCliente.setVisible(false);
+        BtnSalvar.setEnabled(false);
     }
-    private void limpaCampos(){
+
+    private void limpaCampos() {
         TxtNomeCliente.setText("");
         TxtTelefone.setText("");
         TxtCelularCliente.setText("");
@@ -560,7 +612,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtNumeroEndCliente.setText("");
         TxtCidadeCliente.setText("");
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -592,8 +644,6 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
             }
         });
     }
-    
-    
 
     public String[] getDadosOs() {
         return dadosOs;
@@ -602,9 +652,11 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     public void setDadosOs(String[] dadosOs) {
         this.dadosOs = dadosOs;
     }
+
     public String getNome() {
         return Nome;
     }
+
     public String getId() {
         return id;
     }
@@ -672,9 +724,11 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     public void setCpf(String Cpf) {
         this.Cpf = Cpf;
     }
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/View/imgs/clipboard-icon.png")));
     }
+
     public String getEquipamento() {
         return Equipamento;
     }
@@ -722,6 +776,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     public void setProblemaReclamado(String ProblemaReclamado) {
         this.ProblemaReclamado = ProblemaReclamado;
     }
+
     public int getId_os() {
         return id_os;
     }
@@ -729,6 +784,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     public void setId_os(int id_os) {
         this.id_os = id_os;
     }
+
     public String getObsos() {
         return obsos;
     }
@@ -736,6 +792,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     public void setObsos(String obsos) {
         this.obsos = obsos;
     }
+
     public String getEstado() {
         return estado;
     }
@@ -743,6 +800,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
     public String getAberta_fechada() {
         return aberta_fechada;
     }
@@ -763,6 +821,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnSalvar;
     private javax.swing.JLabel LabelNumeroOs;
+    private javax.swing.JLabel LabelStatus;
     private javax.swing.JTextField TxtAcessorioObsOs;
     private javax.swing.JTextField TxtBairroCliente;
     private javax.swing.JFormattedTextField TxtCelularCliente;
@@ -786,6 +845,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -804,25 +864,25 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             try {
                 SalvaOs();
             } catch (JRException ex) {
                 Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             ConfirmaSaida();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
     }
 }

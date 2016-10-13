@@ -180,21 +180,23 @@ public class OrdemServicoDAO extends EntidadeConexao {
                 id = rset.getInt(1);                
             }
             id = id + 1;
-            System.out.println("ID final + 1 -> "+id);
+            //System.out.println("ID final + 1 -> "+id);
             conexao.close();
             return id;
         }catch(SQLException e){
             conexao.close();
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            //JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return 0;
     }
     public String[] visualizaOs() throws SQLException{
-        String dadosVisualizacao[] = new String[9];
+        String dadosVisualizacao[] = new String[19];
         Connection conexao = abreConexao();
+        try{
+            
         PreparedStatement prs;
         ResultSet rset;
-        String sql = "SELECT * FROM ordem_servico,cadastro_clientes WHERE id_os = '"+getId_os()+"' and cadastro_clientes_id = '"+getIdCliente()+"'";
+        String sql = "SELECT * FROM ordem_servico,cadastro_clientes WHERE id_os = '"+getId_os()+"' and id_cliente = '"+getIdCliente()+"'";
         prs = conexao.prepareStatement(sql);
         rset = prs.executeQuery();
         while(rset.next()){
@@ -217,10 +219,15 @@ public class OrdemServicoDAO extends EntidadeConexao {
             dadosVisualizacao[16] = rset.getString("status_os");
             dadosVisualizacao[17] = rset.getString("aberta_fechada");
             dadosVisualizacao[18] = rset.getString("equipamento");
-            System.err.println(dadosVisualizacao);            
+            //JOptionPane.showMessageDialog(null, dadosVisualizacao);
+           
         }
         conexao.close();
         return dadosVisualizacao;
+        }catch(SQLException e){
+            //JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
 
     public String getNomeCliente() {

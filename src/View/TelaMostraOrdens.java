@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 
 /**
@@ -202,8 +203,14 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
         TelaNovaOrdemDeServico abreVisualizacao = new TelaNovaOrdemDeServico();
         retornaVisualizacao.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
         retornaVisualizacao.setIdCliente(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 1).toString());
-        String dadosOs[] = new String[18];
-        abreVisualizacao.setId_os(Integer.parseInt(dadosOs[0]));
+        String statusOs = TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 5).toString();
+        String dadosOs[] = new String[19];
+        try {
+            dadosOs = retornaVisualizacao.visualizaOs();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        abreVisualizacao.setId_os(Integer.parseInt(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString()));
         abreVisualizacao.setNome(dadosOs[1]);
         abreVisualizacao.setBairro(dadosOs[6]);
         abreVisualizacao.setCelular(dadosOs[3]);
@@ -221,8 +228,9 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
         abreVisualizacao.setEstado(dadosOs[8]);
         abreVisualizacao.setProblemaReclamado(dadosOs[14]);
         abreVisualizacao.setEquipamento(dadosOs[18]);
-        abreVisualizacao.PreencheCampos();
-        abreVisualizacao.TravaCampos();
+        abreVisualizacao.setStatusOs(statusOs);
+        JOptionPane.showMessageDialog(null, dadosOs);
+        abreVisualizacao.VisualizaOs();
         abreVisualizacao.setVisible(true);        
         try {
             dadosOs = retornaVisualizacao.visualizaOs();

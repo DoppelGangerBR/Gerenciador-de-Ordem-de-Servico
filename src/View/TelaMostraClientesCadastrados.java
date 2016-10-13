@@ -413,7 +413,7 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
         retornaOsComDados.setBairro(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 6).toString());
         retornaOsComDados.setNumero(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 7).toString());
         retornaOsComDados.setCidade(TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 8).toString());
-        retornaOsComDados.preencheCampos();
+        retornaOsComDados.preencheCamposBuscaCliente();
         retornaOsComDados.setVisible(true);
         dispose();
     }

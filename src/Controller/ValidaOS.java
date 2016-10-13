@@ -62,7 +62,8 @@ public class ValidaOS {
         buscaDadosOs.setId_os(getId_os());
         buscaDadosOs.setIdCliente(getIdCliente());
         buscaDadosOs.visualizaOs();
-        dadosOs = buscaDadosOs.visualizaOs();        
+        dadosOs = buscaDadosOs.visualizaOs();
+        //JOptionPane.showMessageDialog(null, dadosOs);
         return dadosOs;
     }
 
