@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Modelo_OS" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2dbacc76-fb98-457a-a647-518c8707e6d0">
-	<property name="ireport.zoom" value="1.366026910730147"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="1.8181818181818261"/>
+	<property name="ireport.x" value="129"/>
+	<property name="ireport.y" value="17"/>
 	<queryString>
 		<![CDATA[SELECT * FROM ordem_servico,cadastro_clientes]]>
 	</queryString>
@@ -119,7 +119,7 @@
 				<text><![CDATA[Cliente ....:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="74" width="57" height="20" uuid="7d891967-8001-4871-b024-04efd0dd3e7e"/>
+				<reportElement x="377" y="74" width="59" height="20" uuid="7d891967-8001-4871-b024-04efd0dd3e7e"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
@@ -133,21 +133,21 @@
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="444" y="74" width="92" height="20" uuid="79ba3b59-02fb-499e-92c0-054fdae5e6c1"/>
+				<reportElement x="436" y="74" width="92" height="20" uuid="79ba3b59-02fb-499e-92c0-054fdae5e6c1"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="370" y="92" width="57" height="20" uuid="a69c5908-847a-4db6-b077-db3fed98ea81"/>
+				<reportElement x="377" y="92" width="59" height="20" uuid="a69c5908-847a-4db6-b077-db3fed98ea81"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Celular.....:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="444" y="92" width="93" height="20" uuid="96e7fbfd-08a3-4c38-8244-0076c7d482ef"/>
+				<reportElement x="436" y="92" width="93" height="20" uuid="96e7fbfd-08a3-4c38-8244-0076c7d482ef"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -203,25 +203,31 @@
 				<textFieldExpression><![CDATA[$F{cpfcnpj}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="370" y="110" width="57" height="20" uuid="50447904-fb36-41da-8d6f-47c6ac13e6bc"/>
+				<reportElement x="377" y="110" width="59" height="20" uuid="50447904-fb36-41da-8d6f-47c6ac13e6bc"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Bairro.......:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="444" y="110" width="93" height="20" uuid="4a949acb-4bbf-4684-97ea-f6be6c059372"/>
+				<reportElement x="436" y="110" width="100" height="20" uuid="4a949acb-4bbf-4684-97ea-f6be6c059372"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="370" y="128" width="57" height="20" uuid="9134829a-8ba8-445e-ae1a-dc932b17638d"/>
+				<reportElement x="377" y="128" width="57" height="20" uuid="9134829a-8ba8-445e-ae1a-dc932b17638d"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[UF............:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="444" y="128" width="93" height="20" uuid="b9f3431d-f224-481d-bbee-ef3b010be030"/>
+				<reportElement x="436" y="128" width="100" height="20" uuid="b9f3431d-f224-481d-bbee-ef3b010be030"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -232,7 +238,7 @@
 				<reportElement x="0" y="3" width="537" height="149" uuid="16b0b922-d593-4b6a-aaa9-5122ac76d765"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="1" y="4" width="75" height="20" uuid="62c41553-9e56-4a40-bf64-fd7153bf2cf9"/>
+				<reportElement x="1" y="4" width="79" height="20" uuid="62c41553-9e56-4a40-bf64-fd7153bf2cf9"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
@@ -246,7 +252,7 @@
 				<text><![CDATA[Modelo..:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="177" y="4" width="38" height="20" uuid="637674fc-7583-48bd-9e07-f62078e25932"/>
+				<reportElement x="177" y="4" width="55" height="20" uuid="637674fc-7583-48bd-9e07-f62078e25932"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
@@ -260,28 +266,28 @@
 				<textFieldExpression><![CDATA[$F{equipamento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="451" y="4" width="74" height="20" uuid="8ce40609-464e-4959-a399-f319e05ad993"/>
+				<reportElement x="451" y="4" width="85" height="20" uuid="8ce40609-464e-4959-a399-f319e05ad993"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="215" y="4" width="65" height="20" uuid="7cb95d08-0f50-47b6-8cb6-c4331f9c695f"/>
+				<reportElement x="218" y="4" width="65" height="20" uuid="7cb95d08-0f50-47b6-8cb6-c4331f9c695f"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="280" y="4" width="60" height="20" uuid="351033fa-18d3-41db-b2c7-ab7142227491"/>
+				<reportElement x="282" y="4" width="60" height="20" uuid="351033fa-18d3-41db-b2c7-ab7142227491"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nº Serie..:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="328" y="4" width="64" height="20" uuid="22e7fe8a-6b4f-4297-8aa6-9459543ff892"/>
+				<reportElement x="334" y="4" width="64" height="20" uuid="22e7fe8a-6b4f-4297-8aa6-9459543ff892"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>

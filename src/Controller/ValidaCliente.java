@@ -12,7 +12,7 @@ public class ValidaCliente {
     
     private Boolean statusCadastro;
     TelaCadastroAlteracaoVisualizacaoClientes retornoMensagens = new TelaCadastroAlteracaoVisualizacaoClientes();
-    public void validaCampos() throws SQLException{
+    public void validaCadastroAlteracaoRemocao() throws SQLException{
         if(getNome().equals("") || getTelefone().equals("") || getCpfCnpj().equals("") || getNome() == null || getTelefone() == null || getCpfCnpj() == null){
             retornoMensagens.setStatus(false);
             retornoMensagens.setMensagem("Por favor, preencha todos os campos que possum (*)");

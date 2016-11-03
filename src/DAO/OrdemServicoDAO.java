@@ -39,6 +39,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
             conexao.close();
             return true;
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
             conexao.close();
             return false;
         } finally {
@@ -61,6 +62,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
             dm.addColumn("Telefone");
             dm.addColumn("Descrição");
             dm.addColumn("Status");
+            dm.addColumn("Data de abertura");
             String sql = getSql();
             prs = conexao.prepareStatement(sql);
             rset = prs.executeQuery();
@@ -73,8 +75,9 @@ public class OrdemServicoDAO extends EntidadeConexao {
                 int aberta_fechada = rset.getInt(6);
                 int status = rset.getInt(7);
                 String stats = "";
+                String data_abertura   = rset.getString(8);                
                 if(aberta_fechada == 0){
-                    stats = "FECHADA";
+                    stats = "FINALIZADA";
                 }else if(aberta_fechada == 1){
                     if(status == 1){
                         stats = "OK";
@@ -84,7 +87,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
                         stats = "Em atraso +7 dias";
                     }
                 }
-                dm.addRow(new String[]{id_os, id_cliente, nome, telefone, problema_reclamado,stats});                
+                dm.addRow(new String[]{id_os,id_cliente, nome, telefone, problema_reclamado,stats,data_abertura});                
             }
             rset.close();
             prs.close();
@@ -101,8 +104,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
     //SELECT data_abertura::date - now()::date,id_os,aberta_fechada from ordem_servico
 
     public void VerificaDataESetaStatus() throws SQLException {
-        Connection conexao = abreConexao();
-        JOptionPane.showMessageDialog(null, "ENTROU");
+        Connection conexao = abreConexao();        
         try {
             PreparedStatement prs;
             ResultSet rset;
@@ -126,8 +128,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
                         stmt2.executeUpdate(sql);                        
                     }                    
                 }
-            }
-            JOptionPane.showMessageDialog(null, "[OK]");
+            }            
             conexao.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERRO" + e.getMessage());
@@ -137,7 +138,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
     public void fechaOs() throws SQLException {
         Connection conexao = abreConexao();
         try {
-            String sql = "UPDATE ordem_servico SET aberta_fechada = 0 WHERE id_os = '" + getId_os() + "'";
+            String sql = "UPDATE ordem_servico SET aberta_fechada = 0,data_fechamento = now()::date WHERE id_os = '" + getId_os() + "'";
             PreparedStatement prs;
             prs = conexao.prepareStatement(sql);
             prs.executeUpdate();
@@ -192,8 +193,7 @@ public class OrdemServicoDAO extends EntidadeConexao {
     public String[] visualizaOs() throws SQLException{
         String dadosVisualizacao[] = new String[19];
         Connection conexao = abreConexao();
-        try{
-            
+        try{            
         PreparedStatement prs;
         ResultSet rset;
         String sql = "SELECT * FROM ordem_servico,cadastro_clientes WHERE id_os = '"+getId_os()+"' and id_cliente = '"+getIdCliente()+"'";
@@ -229,7 +229,6 @@ public class OrdemServicoDAO extends EntidadeConexao {
         }
         return null;
     }
-
     public String getNomeCliente() {
         return NomeCliente;
     }

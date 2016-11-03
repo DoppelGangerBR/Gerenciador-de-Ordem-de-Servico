@@ -70,7 +70,7 @@
     nbproject/build-impl.xml file. 
 
     -->
-    <target name="-post-jar">    
+     <target name="-post-jar">    
         <property name="store.jar.name" value="${application.title}"/>  
         <property name="store.dir" value="store"/>  
         <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/>  
@@ -89,5 +89,5 @@
                         excludes="META-INF/.SF, META-INF/.DSA, META-INF/*.RSA"/>  
         </zip>  
         <delete file="${store.dir}/temp_final.jar"/>  
-    </target>   
+    </target>  
 </project>

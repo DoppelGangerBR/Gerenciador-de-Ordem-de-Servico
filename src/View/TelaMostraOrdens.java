@@ -29,7 +29,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
         AtualizaTabelaOs();
         AjustaTabela();
         TxtBuscaOs.addKeyListener(this);
-        
+
     }
 
     /**
@@ -140,7 +140,6 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(BtnFinalizaOs)
                                 .addGap(27, 27, 27)
@@ -151,7 +150,8 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TxtBuscaOs, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 208, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -189,16 +189,29 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnFinalizaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFinalizaOsActionPerformed
-        ValidaOS validaFechamentoOs = new ValidaOS();
-        validaFechamentoOs.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
-        try {
-            validaFechamentoOs.fechaOs();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        FinalizaOs();
     }//GEN-LAST:event_BtnFinalizaOsActionPerformed
+    private void FinalizaOs() {
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja finalizar a OS selecionada?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            if (TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 5).toString().equals("FECHADA")) {
+                JOptionPane.showMessageDialog(null, "OS Selecionada ja se encontra fechada!");
+            } else {
+                ValidaOS validaFechamentoOs = new ValidaOS();
+                validaFechamentoOs.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
+                try {
+                    validaFechamentoOs.fechaOs();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
 
+    }
     private void BtnVisualizaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVisualizaOsActionPerformed
+        abreVisualizacaoOs();
+    }//GEN-LAST:event_BtnVisualizaOsActionPerformed
+    private void abreVisualizacaoOs() {
         ValidaOS retornaVisualizacao = new ValidaOS();
         TelaNovaOrdemDeServico abreVisualizacao = new TelaNovaOrdemDeServico();
         retornaVisualizacao.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
@@ -210,6 +223,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
         } catch (SQLException ex) {
             Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         abreVisualizacao.setId_os(Integer.parseInt(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString()));
         abreVisualizacao.setNome(dadosOs[1]);
         abreVisualizacao.setBairro(dadosOs[6]);
@@ -229,18 +243,18 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
         abreVisualizacao.setProblemaReclamado(dadosOs[14]);
         abreVisualizacao.setEquipamento(dadosOs[18]);
         abreVisualizacao.setStatusOs(statusOs);
-        JOptionPane.showMessageDialog(null, dadosOs);
         abreVisualizacao.VisualizaOs();
-        abreVisualizacao.setVisible(true);        
+        abreVisualizacao.setVisible(true);
         try {
             dadosOs = retornaVisualizacao.visualizaOs();
         } catch (SQLException ex) {
             Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }//GEN-LAST:event_BtnVisualizaOsActionPerformed
-
+    }
     private void BtnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnImprimirActionPerformed
+        Impressao();
+    }//GEN-LAST:event_BtnImprimirActionPerformed
+    private void Impressao() {
         OrdemServicoDAO imp = new OrdemServicoDAO();
         //TabelaClientes.getValueAt(TabelaClientes.getSelectedRow(), 0).toString()
         imp.setId_os(TabelaOs.getValueAt(TabelaOs.getSelectedRow(), 0).toString());
@@ -252,17 +266,20 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
         } catch (SQLException ex) {
             Logger.getLogger(TelaMostraOrdens.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_BtnImprimirActionPerformed
-    private void BuscaOs(){
+
+    }
+
+    private void BuscaOs() {
         OrdemServicoDAO dm = new OrdemServicoDAO();
-        dm.setSql("SELECT id_os,id_cliente,nome,telefone,problema_reclamado,aberta_fechada,status_os FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente AND nome ILIKE '%"+ TxtBuscaOs.getText()+"%' ORDER BY id_os DESC");
-        try{
+        dm.setSql("SELECT id_os,id_cliente,nome,telefone,problema_reclamado,aberta_fechada,status_os,data_fechamento,data_abertura FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente AND nome ILIKE '%" + TxtBuscaOs.getText() + "%' ORDER BY id_os DESC");
+        try {
             TabelaOs.setModel(dm.AlimentaTabelaOs());
             AjustaTabela();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.getMessage();
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -302,34 +319,39 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
             }
         });
     }
-    public void AtualizaTabelaOs()throws SQLException{
+
+    public void AtualizaTabelaOs() throws SQLException {
         OrdemServicoDAO dm = new OrdemServicoDAO();
-        dm.setSql("SELECT id_os,id_cliente,nome,telefone,problema_reclamado,aberta_fechada,status_os FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente ORDER BY id_os DESC");
-        TabelaOs.setModel(dm.AlimentaTabelaOs());        
+        dm.setSql("SELECT id_os,id_cliente,nome,telefone,problema_reclamado,aberta_fechada,status_os,data_abertura FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente ORDER BY id_os DESC");
+        TabelaOs.setModel(dm.AlimentaTabelaOs());
     }
-    private void AjustaTabela() throws SQLException{                
-                TabelaOs.changeSelection(0, 0, false, false);
-                TabelaOs.getColumnModel().getColumn(0).setMinWidth(50);
-                TabelaOs.getColumnModel().getColumn(0).setPreferredWidth(50);
-                TabelaOs.getColumnModel().getColumn(0).setMaxWidth(50);
-                TabelaOs.getColumnModel().getColumn(1).setMinWidth(50);
-                TabelaOs.getColumnModel().getColumn(1).setPreferredWidth(50);
-                TabelaOs.getColumnModel().getColumn(1).setMaxWidth(50);
-                TabelaOs.getColumnModel().getColumn(2).setMinWidth(180);
-                TabelaOs.getColumnModel().getColumn(2).setPreferredWidth(180);
-                TabelaOs.getColumnModel().getColumn(2).setMaxWidth(180);
-                TabelaOs.getColumnModel().getColumn(3).setMinWidth(110);
-                TabelaOs.getColumnModel().getColumn(3).setPreferredWidth(110);
-                TabelaOs.getColumnModel().getColumn(3).setMaxWidth(110);
-                TabelaOs.getColumnModel().getColumn(4).setMinWidth(200);
-                TabelaOs.getColumnModel().getColumn(4).setPreferredWidth(200);
-                TabelaOs.getColumnModel().getColumn(4).setMaxWidth(200);
-                TabelaOs.getColumnModel().getColumn(5).setMinWidth(150);
-                TabelaOs.getColumnModel().getColumn(5).setPreferredWidth(150);
-                TabelaOs.getColumnModel().getColumn(5).setMaxWidth(150); 
-                TabelaOs.changeSelection(0, 0, false, false);
+
+    private void AjustaTabela() throws SQLException {
+        TabelaOs.changeSelection(0, 0, false, false);
+        TabelaOs.getColumnModel().getColumn(0).setMinWidth(50);
+        TabelaOs.getColumnModel().getColumn(0).setPreferredWidth(50);
+        TabelaOs.getColumnModel().getColumn(0).setMaxWidth(50);
+        TabelaOs.getColumnModel().getColumn(1).setMinWidth(0);
+        TabelaOs.getColumnModel().getColumn(1).setPreferredWidth(0);
+        TabelaOs.getColumnModel().getColumn(1).setMaxWidth(0);
+        TabelaOs.getColumnModel().getColumn(2).setMinWidth(150);
+        TabelaOs.getColumnModel().getColumn(2).setPreferredWidth(150);
+        TabelaOs.getColumnModel().getColumn(2).setMaxWidth(150);
+        TabelaOs.getColumnModel().getColumn(3).setMinWidth(100);
+        TabelaOs.getColumnModel().getColumn(3).setPreferredWidth(100);
+        TabelaOs.getColumnModel().getColumn(3).setMaxWidth(100);
+        TabelaOs.getColumnModel().getColumn(4).setMinWidth(200);
+        TabelaOs.getColumnModel().getColumn(4).setPreferredWidth(200);
+        TabelaOs.getColumnModel().getColumn(4).setMaxWidth(200);
+        TabelaOs.getColumnModel().getColumn(5).setMinWidth(115);
+        TabelaOs.getColumnModel().getColumn(5).setPreferredWidth(115);
+        TabelaOs.getColumnModel().getColumn(5).setMaxWidth(115);
+        TabelaOs.getColumnModel().getColumn(6).setMinWidth(100);
+        TabelaOs.getColumnModel().getColumn(6).setPreferredWidth(100);
+        TabelaOs.getColumnModel().getColumn(6).setMaxWidth(100);       
+        TabelaOs.changeSelection(0, 0, false, false);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnFinalizaOs;
@@ -350,11 +372,11 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
 
     @Override
     public void keyPressed(KeyEvent e) {
-        
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
     }
 }

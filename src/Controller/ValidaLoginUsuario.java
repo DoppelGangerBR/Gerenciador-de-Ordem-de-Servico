@@ -12,29 +12,7 @@ public class ValidaLoginUsuario {
     private String usuario, senha;
     private Boolean status;
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-    
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+   
     public void ValidaLogin() throws SQLException{
         if(getSenha().equals("") || getUsuario().equals("")){
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos", "Erro", 0);
@@ -61,6 +39,29 @@ public class ValidaLoginUsuario {
                     + "Por favor, tente novamente!");
             retornaStatusDoControle.exibeMensagens();
         }
+    }
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+    
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 }

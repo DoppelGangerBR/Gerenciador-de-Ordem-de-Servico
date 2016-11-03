@@ -17,7 +17,9 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     String[] dadosOs = new String[9];
     private String Nome, Endereco, Bairro, Cidade, Numero, Telefone, Celular, Cpf, id, estado;
     private String Equipamento, Marca, Modelo, Acessorio, NumSerie, ProblemaReclamado, obsos;
-    private String aberta_fechada, statusOs;
+    private String aberta_fechada, statusOs, data_fechamento, data_abertura;
+
+    
     private int id_os;
 
     public TelaNovaOrdemDeServico() {
@@ -26,7 +28,9 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         addKeyListener(this);
         TxtProblemaReclamadoOS.addKeyListener(this);
         TxtNomeCliente.addKeyListener(this);
-
+        LabelStatus.setVisible(false);
+        LabelTituloStatus.setVisible(false);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -71,7 +75,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         jLabel16 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TxtObs = new javax.swing.JTextArea();
-        jLabel17 = new javax.swing.JLabel();
+        LabelTituloStatus = new javax.swing.JLabel();
         LabelStatus = new javax.swing.JLabel();
         BtnSalvar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
@@ -188,7 +192,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtNumeroEndCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +297,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtProblemaReclamadoOS.setColumns(20);
         TxtProblemaReclamadoOS.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         TxtProblemaReclamadoOS.setLineWrap(true);
-        TxtProblemaReclamadoOS.setRows(5);
+        TxtProblemaReclamadoOS.setRows(3);
         jScrollPane1.setViewportView(TxtProblemaReclamadoOS);
 
         jLabel16.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -305,10 +309,10 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtObs.setRows(5);
         jScrollPane2.setViewportView(TxtObs);
 
-        jLabel17.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel17.setText("STATUS:");
+        LabelTituloStatus.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        LabelTituloStatus.setText("STATUS:");
 
-        LabelStatus.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        LabelStatus.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -339,10 +343,10 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                                 .addGap(14, 14, 14)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel17)
+                                        .addComponent(LabelTituloStatus)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(LabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jLabel14)
                     .addComponent(jLabel16)
                     .addComponent(jScrollPane2))
@@ -351,6 +355,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
@@ -369,20 +374,20 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel17))
+                    .addComponent(LabelTituloStatus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtAcessorioObsOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         BtnSalvar.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
@@ -408,17 +413,17 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,8 +431,8 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnSalvar)
                     .addComponent(BtnCancelar))
@@ -496,6 +501,9 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         }
     }
     private void BtnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscaClienteActionPerformed
+        BuscaCliente();
+    }//GEN-LAST:event_BtnBuscaClienteActionPerformed
+    private void BuscaCliente(){
         try {
             TelaMostraClientesCadastrados selecionaCliente = new TelaMostraClientesCadastrados();
             selecionaCliente.setStatus(true);
@@ -504,9 +512,9 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         } catch (SQLException ex) {
             Logger.getLogger(TelaNovaOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_BtnBuscaClienteActionPerformed
+    }
     private void ConfirmaSaida() {
-        int x = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar a abertura da OS?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        int x = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja voltar?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (x == JOptionPane.YES_OPTION) {
             dispose();
         }
@@ -564,20 +572,23 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtTelefone.setText(getTelefone());
         TxtObs.setText(getObsos());
         BtnCancelar.setText("Fechar");
+        
     }
     private void setaStatus(){
+        LabelStatus.setVisible(true);
+        LabelTituloStatus.setVisible(true);
         if(getStatusOs().equals("OK")){
-            LabelStatus.setText("OK");
-            LabelStatus.setBackground(Color.green);
+            LabelStatus.setText("OK");            
+            LabelStatus.setForeground(Color.DARK_GRAY);
         }if(getStatusOs().equals("Em atraso 3-7 dias")){
             LabelStatus.setText("Em atraso 3-7 dias");
-            LabelStatus.setBackground(Color.yellow);
+            LabelStatus.setForeground(Color.yellow);
         }if(getStatusOs().equals("Em atraso +7 dias")){
             LabelStatus.setText("Em atraso +7 dias");
-            LabelStatus.setBackground(Color.red);
-        }if(getStatusOs().equals("FECHADA")){
-            LabelStatus.setText("FECHADA");
-            LabelStatus.setBackground(Color.blue);
+            LabelStatus.setForeground(Color.red);
+        }if(getStatusOs().equals("FINALIZADA")){
+            LabelStatus.setText("FINALIZADA");
+            LabelStatus.setForeground(Color.blue);
         }
     }
 
@@ -601,7 +612,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         BtnSalvar.setEnabled(false);
     }
 
-    private void limpaCampos() {
+    /**private void limpaCampos() {
         TxtNomeCliente.setText("");
         TxtTelefone.setText("");
         TxtCelularCliente.setText("");
@@ -611,7 +622,7 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
         TxtBairroCliente.setText("");
         TxtNumeroEndCliente.setText("");
         TxtCidadeCliente.setText("");
-    }
+    }**/
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -816,12 +827,28 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     public void setStatusOs(String statusOs) {
         this.statusOs = statusOs;
     }
+    public String getData_fechamento() {
+        return data_fechamento;
+    }
+
+    public void setData_fechamento(String data_fechamento) {
+        this.data_fechamento = data_fechamento;
+    }
+
+    public String getData_abertura() {
+        return data_abertura;
+    }
+
+    public void setData_abertura(String data_abertura) {
+        this.data_abertura = data_abertura;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscaCliente;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnSalvar;
     private javax.swing.JLabel LabelNumeroOs;
     private javax.swing.JLabel LabelStatus;
+    private javax.swing.JLabel LabelTituloStatus;
     private javax.swing.JTextField TxtAcessorioObsOs;
     private javax.swing.JTextField TxtBairroCliente;
     private javax.swing.JFormattedTextField TxtCelularCliente;
@@ -845,7 +872,6 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -886,3 +912,5 @@ public class TelaNovaOrdemDeServico extends javax.swing.JFrame implements KeyLis
 
     }
 }
+
+

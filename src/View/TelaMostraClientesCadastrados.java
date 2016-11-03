@@ -361,6 +361,9 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
     }
 
     private void BtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemoverActionPerformed
+        removeCliente();
+    }//GEN-LAST:event_BtnRemoverActionPerformed
+    private void removeCliente(){
         int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o cliente selecionado?", "Confirmar exclusão", JOptionPane.YES_NO_OPTION);
         if (resposta == JOptionPane.YES_OPTION) {
             try {
@@ -372,14 +375,11 @@ public class TelaMostraClientesCadastrados extends javax.swing.JFrame implements
                 Logger.getLogger(TelaMostraClientesCadastrados.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
-    }//GEN-LAST:event_BtnRemoverActionPerformed
-
+    }
     private void TabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaClientesMouseClicked
         if (isStatus() == true) {
             retornaCliente();
         }
-
     }//GEN-LAST:event_TabelaClientesMouseClicked
 
     private void BtnBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscaClienteActionPerformed

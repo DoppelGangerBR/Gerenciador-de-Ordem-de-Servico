@@ -57,9 +57,6 @@ public class Principal extends javax.swing.JFrame implements KeyListener{
         setFocusable(false);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -173,16 +170,12 @@ public class Principal extends javax.swing.JFrame implements KeyListener{
         new TelaCadastroAlteracaoVisualizacaoClientes().setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
-    }//GEN-LAST:event_formWindowClosed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         fechaSoftware();
     }//GEN-LAST:event_formWindowClosing
     private void fechaSoftware(){
-        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja fechar o software?","Confirmação", JOptionPane.YES_NO_OPTION);
-        if(confirma == JOptionPane.YES_OPTION){
+        int confirmaSaida = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja fechar o software?","Confirmação", JOptionPane.YES_NO_OPTION);
+        if(confirmaSaida == JOptionPane.YES_OPTION){
             System.exit(0);
         }
     }

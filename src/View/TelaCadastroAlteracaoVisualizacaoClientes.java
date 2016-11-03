@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -381,8 +382,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
     }
 
     private void realizarCadastroAlteracao() throws SQLException {
-        if (getId_cliente() == null) {
-            //Nome,Telefone,Celular,CpfCnpj,Endereco,Numero,Bairro,Cidade,Estado
+        if (getId_cliente() == null) {            
             ValidaCliente controle = new ValidaCliente();
             controle.setNome(TxtNome.getText());
             controle.setTelefone(TxtTelefone.getText());
@@ -393,7 +393,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
             controle.setBairro(TxtBairro.getText());
             controle.setCidade(TxtCidade.getText());
             controle.setEstado(TxtEstado.getText());
-            controle.validaCampos();
+            controle.validaCadastroAlteracaoRemocao();
 
         } else {
             ValidaCliente controle = new ValidaCliente();
@@ -407,7 +407,7 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
             controle.setBairro(TxtBairro.getText());
             controle.setCidade(TxtCidade.getText());
             controle.setEstado(TxtEstado.getText());
-            controle.validaCampos();
+            controle.validaCadastroAlteracaoRemocao();
         }
 
     }
@@ -416,7 +416,9 @@ public class TelaCadastroAlteracaoVisualizacaoClientes extends javax.swing.JFram
         if (getMensagem().equals("Alteração")) {
             BtnLimpar.setEnabled(false);
             OpcLimparCampos.setEnabled(false);
+            this.setTitle("Cliente - "+getMensagem());
         }
+        this.setTitle("Cliente - "+getMensagem());
         LabelTituloCliente.setText("Cliente - " + getMensagem());
         TxtBairro.setText(getBairro());
         TxtCeluar.setText(getCelular());
