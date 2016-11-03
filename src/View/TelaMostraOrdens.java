@@ -326,8 +326,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
         TabelaOs.setModel(dm.AlimentaTabelaOs());
     }
 
-    private void AjustaTabela() throws SQLException {
-        TabelaOs.changeSelection(0, 0, false, false);
+    private void AjustaTabela() throws SQLException {        
         TabelaOs.getColumnModel().getColumn(0).setMinWidth(50);
         TabelaOs.getColumnModel().getColumn(0).setPreferredWidth(50);
         TabelaOs.getColumnModel().getColumn(0).setMaxWidth(50);
