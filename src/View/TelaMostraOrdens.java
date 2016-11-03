@@ -271,7 +271,7 @@ public class TelaMostraOrdens extends javax.swing.JFrame implements KeyListener 
 
     private void BuscaOs() {
         OrdemServicoDAO dm = new OrdemServicoDAO();
-        dm.setSql("SELECT id_os,id_cliente,nome,telefone,problema_reclamado,aberta_fechada,status_os,data_fechamento,data_abertura FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente AND nome ILIKE '%" + TxtBuscaOs.getText() + "%' ORDER BY id_os DESC");
+        dm.setSql("SELECT id_os,id_cliente,nome,telefone,problema_reclamado,aberta_fechada,status_os,data_abertura FROM ordem_servico,cadastro_clientes WHERE cadastro_clientes_id = id_cliente AND nome ILIKE '%" + TxtBuscaOs.getText() + "%' ORDER BY id_os DESC");
         try {
             TabelaOs.setModel(dm.AlimentaTabelaOs());
             AjustaTabela();
